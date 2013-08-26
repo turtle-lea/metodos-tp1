@@ -95,15 +95,16 @@ float Metodos::Secante_f(){
 	float prox;	/// = xn+1
 	int i = 0;
 
-	while(!(this->criterios).criterio1_parar(i)){
+	while(!(this->criterios).criterio1_parar(i) && !(this->criterios).criterio3_parar(functions.f(actual))){
 		prox = actual - (functions.f(actual)*(actual-anterior)/(functions.f(actual)-functions.f(anterior)));
 		anterior = actual;
 		actual = prox;
 		++i;
 	}
-	
+
 	cout << "Cero teórico: " << (this->functions).cero_teorico() << endl;
 	cout << "Raiz obtenida: " << actual << endl;
+	cout << "Iteraciones: " << i << endl;
 	return actual;
 }
 
@@ -114,15 +115,25 @@ float Metodos::Secante_e(){
 	float prox;	/// = xn+1
 	int i = 0;
 
-	while(!(this->criterios).criterio1_parar(i)){
+//	while(!(this->criterios).criterio1_parar(i) && !(this->criterios).criterio3_parar(functions.e(actual))){
 		prox = actual - (functions.e(actual)*(actual-anterior)/(functions.e(actual)-functions.e(anterior)));
 		anterior = actual;
 		actual = prox;
 		++i;
-	}
+//	}
+		prox = actual - (functions.e(actual)*(actual-anterior)/(functions.e(actual)-functions.e(anterior)));
+		anterior = actual;
+		actual = prox;
+		++i;
+			prox = actual - (functions.e(actual)*(actual-anterior)/(functions.e(actual)-functions.e(anterior)));
+		anterior = actual;
+		actual = prox;
+		++i;
+	
 	
 	cout << "Cero teórico: " << (this->functions).cero_teorico() << endl;
 	cout << "Raiz obtenida: " << actual << endl;
+	cout << "Iteraciones: " << i << endl;
 	return actual;
 }
 
