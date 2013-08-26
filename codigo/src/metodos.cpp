@@ -33,11 +33,35 @@ float Metodos::Biseccion(){
 }
 
 float Metodos::Newton_f(){
-	float x0 = Biseccion_f();
-	
+	float anterior = Biseccion_f();
+	float actual;
+	int i = 0;
+
+	while(!criterios.criterio1_parar(i)){
+		actual = anterior - functions.f(anterior)/functions.f_deriv(anterior);
+		anterior = actual;
+		++i;
+	}
 	
 	cout << "Cero teórico: " << (this->functions).cero_teorico() << endl;
-	cout << "Raiz obtenida: " << res << endl;
+	cout << "Raiz obtenida: " << actual << endl;
+	return actual;
+}
+
+float Metodos::Newton_e(){
+	float anterior = Biseccion_e();
+	float actual;
+	int i = 0;
+
+	while(!criterios.criterio1_parar(i)){
+		actual = anterior - functions.e(anterior)/functions.e_deriv(anterior);
+		anterior = actual;
+		++i;
+	}
+	
+	cout << "Cero teórico: " << 1.0/(this->functions).cero_teorico() << endl;
+	cout << "Raiz obtenida: " << actual << endl;
+	return actual;
 }
 
 
