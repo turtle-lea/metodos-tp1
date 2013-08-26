@@ -16,7 +16,7 @@ No podemos utilizar la funcion sqrt(alpha). Por lo tanto hay que encontrarlo de 
 	Llamaremos beta al valor de la raíz obtenida. Luego debemos proceder a calcular 1/beta.
 
 	METODO 2:
-	Definimos f(x) = 1/x^2 - 1/alpha.
+	Definimos e(x) = 1/x^2 - 1/alpha.
 	Llamaremos beta al valor de la raíz obtenida. No debemos hacer nada más.
 
 

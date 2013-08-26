@@ -32,4 +32,13 @@ float Metodos::Biseccion(){
 	return res;	
 }
 
+float Metodos::Newton_f(){
+	float x0 = Biseccion_f();
+	
+	
+	cout << "Cero teórico: " << (this->functions).cero_teorico() << endl;
+	cout << "Raiz obtenida: " << res << endl;
+}
+
+
 
