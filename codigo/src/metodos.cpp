@@ -51,7 +51,8 @@ float Metodos::Biseccion_e(){
 }
 
 float Metodos::Newton_f(){
-	float anterior = Biseccion_f();
+	//float anterior = Biseccion_f();
+	float anterior = 3.0;
 	float actual;
 	int i = 0;
 
@@ -67,7 +68,8 @@ float Metodos::Newton_f(){
 }
 
 float Metodos::Newton_e(){
-	float anterior = Biseccion_e();
+	//float anterior = Biseccion_e();
+	float anterior = 1.0;
 	float actual;
 	int i = 0;
 
