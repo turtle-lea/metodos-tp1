@@ -16,9 +16,12 @@ class Metodos{
 		Metodos(){}
 		Metodos(const Funciones& fs, const Criterios& cs): criterios(cs),functions(fs){}
 		float Biseccion();
-		//float Newton();
-		//float Regula_falsi();
-		//float Secante();
+		float Newton_f();
+		float Newton_e();
+		float Regula_falsi_f();
+		float Regula_falsi_e();
+		float Secante_f();
+		float Secante_e();
 
 	private:
 		Funciones functions;
