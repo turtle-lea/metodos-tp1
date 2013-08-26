@@ -75,6 +75,9 @@ float Metodos::Newton_e(){
 
 	while(!(this->criterios).criterio1_parar(i)){
 		actual = anterior - functions.e(anterior)/functions.e_deriv(anterior);
+		cout << "Anterior: " << anterior << endl;
+		cout << "e(anterior) : " << functions.e(anterior) << endl;
+		cout << "e_deriv(anterior) : " << functions.e_deriv(anterior) << endl;
 		anterior = actual;
 		++i;
 	}

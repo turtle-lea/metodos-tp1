@@ -19,7 +19,7 @@ class Funciones{
 
 		// e corresponde al segundo experimento para obtener 1/sqrt(alpha)
 		float e(float x){return 1.0/(x*x) - this->alpha;}		
-		float e_deriv(float x){ (-2.0)/(x*x*x);}
+		float e_deriv(float x){ return (-2.0)/(x*x*x);}
 		pair<float,float> semillas_biseccion_e();
 
 		float cero_teorico(){return sqrt(alpha);}

@@ -8,8 +8,12 @@ using namespace std;
 
 int main(){
 	Funciones fs(5.25);
-	Criterios cs(10000,0.000001);
+	Criterios cs(100,0.000001);
 	Metodos ms(fs,cs);
+
+	cout << "Newton e: " << endl << endl;
+	ms.Newton_e();
+	cout << endl;
 
 	cout << "Biseccion f: " << endl;
 	ms.Biseccion_f();
@@ -21,10 +25,6 @@ int main(){
 
 	cout << "Newton f: " << endl << endl;
 	ms.Newton_f();
-	cout << endl;
-
-	cout << "Newton e: " << endl << endl;
-	ms.Newton_e();
 	cout << endl;
 
 	cout << "Regula_falsi f: " << endl << endl;
@@ -42,6 +42,7 @@ int main(){
 	cout << "Secante e: " << endl << endl;
 	ms.Secante_e();
 	cout << endl;
+	
 
 	return 0;
 }
