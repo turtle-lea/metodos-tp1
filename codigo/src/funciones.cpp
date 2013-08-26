@@ -15,7 +15,7 @@ using namespace std;
 
 pair<float,float> Funciones::semillas_biseccion_f(){
 	pair<float,float> res;
-	if (abs(this->alpha) < 1) {
+	if (abs(this->alpha) < 1){
 		res.first = 1.0;
 		res.second = alpha;
 	}
@@ -32,6 +32,17 @@ pair<float,float> Funciones::semillas_biseccion_f(){
 
 pair<float,float> Funciones::semillas_biseccion_e(){
 	pair<float,float> res;
+	if (abs(this->alpha) < 1){
+		res.first = 1.0/alpha;
+		res.second = alpha;
+	}
+	else {
+		if (alpha == 1.0) { res.first = alpha ; res.second = alpha ; }
+		else{
+			res.first = alpha;
+			res.second = 1.0/alpha;
+		}
+	}
 	return res;
 }
 
