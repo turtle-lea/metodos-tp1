@@ -8,7 +8,7 @@ using namespace std;
 
 int main(){
 	Funciones fs(5.25);
-	Criterios cs(200,0.000001);
+	Criterios cs(10000,0.000001);
 	Metodos ms(fs,cs);
 
 	cout << "Biseccion f: " << endl;
@@ -16,7 +16,7 @@ int main(){
 	cout << endl;
 
 	cout << "Biseccion e: " << endl << endl;
-	ms.Biseccion_e();
+	float aux = ms.Biseccion_e();
 	cout << endl;
 
 	cout << "Newton f: " << endl << endl;

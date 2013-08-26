@@ -32,7 +32,7 @@ pair<float,float> Funciones::semillas_biseccion_f(){
 
 pair<float,float> Funciones::semillas_biseccion_e(){
 	pair<float,float> res;
-	if (abs(this->alpha) < 1){
+	if (abs(this->alpha) > 1){
 		res.first = 1.0/alpha;
 		res.second = alpha;
 	}
@@ -43,6 +43,10 @@ pair<float,float> Funciones::semillas_biseccion_e(){
 			res.second = 1.0/alpha;
 		}
 	}
+
+	cout << "Positivo: " << res.first << endl;
+	cout << "Negativo: " << res.second << endl;
+
 	return res;
 }
 
