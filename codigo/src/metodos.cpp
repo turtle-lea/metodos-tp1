@@ -10,7 +10,7 @@ float Metodos::Biseccion_f(){
 	float positivo = (this->functions).semillas_biseccion_f().first;
 	float negativo = (this->functions).semillas_biseccion_f().second;
 
-	while (!criterio1_parar(i)){
+	while (!(this->criterios).criterio1_parar(i)){
 		float medio = (positivo+negativo)/2;
 		
 		if ( (this->functions).f(medio) < 0 ) { negativo = medio; }
@@ -33,7 +33,7 @@ float Metodos::Biseccion_e(){
 	float positivo = (this->functions).semillas_biseccion_e().first;
 	float negativo = (this->functions).semillas_biseccion_e().second;
 
-	while (!criterio1_parar(i)){
+	while (!(this->criterios).criterio1_parar(i)){
 		float medio = (positivo+negativo)/2;
 		
 		if ( (this->functions).e(medio) < 0 ) { negativo = medio; }
@@ -55,7 +55,7 @@ float Metodos::Newton_f(){
 	float actual;
 	int i = 0;
 
-	while(!criterios.criterio1_parar(i)){
+	while(!(this->criterios).criterio1_parar(i)){
 		actual = anterior - functions.f(anterior)/functions.f_deriv(anterior);
 		anterior = actual;
 		++i;
@@ -71,7 +71,7 @@ float Metodos::Newton_e(){
 	float actual;
 	int i = 0;
 
-	while(!criterios.criterio1_parar(i)){
+	while(!(this->criterios).criterio1_parar(i)){
 		actual = anterior - functions.e(anterior)/functions.e_deriv(anterior);
 		anterior = actual;
 		++i;
@@ -84,13 +84,13 @@ float Metodos::Newton_e(){
 ///FALTA VER CRITERIOS PARA TODOS! ---------------------------------------------------------------------------------------------------------------------
 
 float Metodos::Secante_f(){
-	pair<float,float> xceros = semillas_biseccion_f();
+	pair<float,float> xceros = (this->functions).semillas_biseccion_f();
 	float anterior = xceros.first;	/// = xn-1
 	float actual = xceros.second;	/// = xn
 	float prox;	/// = xn+1
 	int i = 0;
 
-	while(!criterios.criterio1_parar(i)){
+	while(!(this->criterios).criterio1_parar(i)){
 		prox = actual - (functions.f(actual)*(actual-anterior)/(functions.f(actual)-functions.f(anterior)));
 		anterior = actual;
 		actual = prox;
@@ -103,13 +103,13 @@ float Metodos::Secante_f(){
 }
 
 float Metodos::Secante_e(){
-	pair<float,float> xceros = semillas_biseccion_e();
+	pair<float,float> xceros = (this->functions).semillas_biseccion_e();
 	float anterior = xceros.first;	/// = xn-1
 	float actual = xceros.second;	/// = xn
 	float prox;	/// = xn+1
 	int i = 0;
 
-	while(!criterios.criterio1_parar(i)){
+	while(!(this->criterios).criterio1_parar(i)){
 		prox = actual - (functions.e(actual)*(actual-anterior)/(functions.e(actual)-functions.e(anterior)));
 		anterior = actual;
 		actual = prox;
@@ -122,13 +122,13 @@ float Metodos::Secante_e(){
 }
 
 float Metodos::Regula_falsi_f(){
-	pair<float,float> xceros = semillas_biseccion_f();
+	pair<float,float> xceros = (this->functions).semillas_biseccion_f();
 	float positivo = xceros.first;	/// = xn-1
 	float negativo = xceros.second;	/// = xn
 	float prox;	/// = xn+1
 	int i = 0;
 
-	while(!criterios.criterio1_parar(i)){
+	while(!(this->criterios).criterio1_parar(i)){
 		prox = negativo - (functions.f(negativo)*(negativo-positivo)/(functions.f(negativo)-functions.f(positivo)));
 		
 		if(prox > 0) positivo = prox;
@@ -142,13 +142,13 @@ float Metodos::Regula_falsi_f(){
 }
 
 float Metodos::Regula_falsi_e(){
-	pair<float,float> xceros = semillas_biseccion_e();
+	pair<float,float> xceros = (this->functions).semillas_biseccion_e();
 	float positivo = xceros.first;	/// = xn-1
 	float negativo = xceros.second;	/// = xn
 	float prox;	/// = xn+1
 	int i = 0;
 
-	while(!criterios.criterio1_parar(i)){
+	while(!(this->criterios).criterio1_parar(i)){
 		prox = negativo - (functions.e(negativo)*(negativo-positivo)/(functions.e(negativo)-functions.e(positivo)));
 		
 		if(prox > 0) positivo = prox;

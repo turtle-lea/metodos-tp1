@@ -10,7 +10,7 @@ int main(){
 	Funciones fs(5.25);
 	Criterios cs(200,0.000001);
 	Metodos ms(fs,cs);
-	ms.Biseccion(); 
+	ms.Biseccion_f(); 
 	return 0;
 }
 
