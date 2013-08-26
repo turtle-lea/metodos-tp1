@@ -1,7 +1,11 @@
 CC = g++
 
-main : obj/main.o obj/funciones.o obj/metodos.o obj/criterios.o
+main : folder obj/main.o obj/funciones.o obj/metodos.o obj/criterios.o
 	$(CC) -o bin/main obj/main.o obj/funciones.o obj/metodos.o obj/criterios.o
+
+folder:
+	mkdir -p ./bin
+	mkdir -p ./obj
 
 obj/main.o : src/main.cpp
 	$(CC) -c src/main.cpp -o obj/main.o
@@ -16,6 +20,6 @@ obj/criterios.o : src/criterios.cpp
 	$(CC) -c src/criterios.cpp -o obj/criterios.o
 
 clean:
-	rm bin/main obj/main.o obj/metodos.o obj/funciones.o obj/criterios.o
+	rm -f -r bin obj
 
 
