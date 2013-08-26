@@ -13,10 +13,8 @@ aspectos como las funciones y el alpha */
 
 class Metodos{
 	public:
-		Metodos(const Funciones& fs, const Criterios& cs){
-			criterios = cs;	
-			functions = fs;
-		}
+		Metodos(){}
+		Metodos(const Funciones& fs, const Criterios& cs): criterios(cs),functions(fs){}
 		float Biseccion();
 		//float Newton();
 		//float Regula_falsi();

@@ -3,11 +3,8 @@
 
 class Criterios{
 	public:
-		Criterios();
-		Criterios(int x, e){
-			max_iter = x;
-			epsilon = e;
-		}
+		Criterios(){}
+		Criterios(int x, float e):max_iter(x),epsilon(e){}
 
 		//N = max_iter 
 		bool criterio1_parar(int x){return x >= max_iter;}

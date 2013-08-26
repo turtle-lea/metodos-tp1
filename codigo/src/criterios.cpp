@@ -1,5 +1,7 @@
 #include "../include/criterios.h"
+#include <iostream>
 #include <cmath>
+using namespace std;
 
 bool Criterios::criterio2_parar(float x, float x_anterior){
 	return abs(x - x_anterior) < (this->epsilon);
