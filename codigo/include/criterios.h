@@ -23,6 +23,15 @@ class Criterios{
 
 		// ( |f(x) - f(x_anterior)| / |f(x_anterior)| ) < epsilon
 		bool criterio4_bis_parar(float y, float y_anterior);
+		
+		//	Todos los criterios en 1, con selector se elige cual:
+		//	1:Maximo Iteraciones
+		//	2:Distancia absoluta de iteraciones sucesivas
+		//	3:Distancia relativa de iteraciones sucesivas
+		//	4:Error absoluto
+		//	5:Distancia absoluta de valores de iteraciones sucesivas
+		//	6:Distancia relativa de valores de iteraciones sucesivas
+		bool criterios(int selector, int maxIter,float x,float x_anterior);
 
 	private:
 		int max_iter;
