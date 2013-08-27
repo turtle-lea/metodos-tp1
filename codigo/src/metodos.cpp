@@ -107,8 +107,10 @@ float Metodos::Secante_f(){
 
 float Metodos::Secante_e(){
 	pair<float,float> xceros = (this->functions).semillas_biseccion_e();
-	float anterior = xceros.first;	/// = xn-1
-	float actual = xceros.second;	/// = xn
+	//float anterior = xceros.first;	/// = xn-1
+	//float actual = xceros.second;	/// = xn
+	float anterior = 0.9;
+	float actual = 0.6;
 	float prox;	/// = xn+1
 	int i = 0;
 

@@ -11,11 +11,7 @@ int main(){
 	Criterios cs(20,0.000001);
 	Metodos ms(fs,cs);
 
-	cout << "Regula_falsi e: " << endl << endl;
-	ms.Regula_falsi_e();
-	cout << endl;
 
-	/*
 	cout << "Biseccion f: " << endl;
 	ms.Biseccion_f();
 	cout << endl;
@@ -36,6 +32,10 @@ int main(){
 	ms.Regula_falsi_f();
 	cout << endl;
 
+	cout << "Regula_falsi e: " << endl << endl;
+	ms.Regula_falsi_e();
+	cout << endl;
+
 	cout << "Secante f: " << endl << endl;
 	ms.Secante_f();
 	cout << endl;
@@ -44,7 +44,6 @@ int main(){
 	ms.Secante_e();
 	cout << endl;
 
-	*/
 	return 0;
 }
 
