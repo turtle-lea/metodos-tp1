@@ -75,9 +75,6 @@ float Metodos::Newton_e(){
 
 	while(!(this->criterios).criterio1_parar(i)){
 		actual = anterior - functions.e(anterior)/functions.e_deriv(anterior);
-		cout << "Anterior: " << anterior << endl;
-		cout << "e(anterior) : " << functions.e(anterior) << endl;
-		cout << "e_deriv(anterior) : " << functions.e_deriv(anterior) << endl;
 		anterior = actual;
 		++i;
 	}
@@ -115,23 +112,14 @@ float Metodos::Secante_e(){
 	float prox;	/// = xn+1
 	int i = 0;
 
-//	while(!(this->criterios).criterio1_parar(i) && !(this->criterios).criterio3_parar(functions.e(actual))){
-		prox = actual - (functions.e(actual)*(actual-anterior)/(functions.e(actual)-functions.e(anterior)));
+	while(!(this->criterios).criterio1_parar(i) && !(this->criterios).criterio3_parar(functions.e(actual))){
+		prox = actual - ((functions.e(actual)*(actual-anterior))/(functions.e(actual)-functions.e(anterior)));
 		anterior = actual;
 		actual = prox;
 		++i;
-//	}
-		prox = actual - (functions.e(actual)*(actual-anterior)/(functions.e(actual)-functions.e(anterior)));
-		anterior = actual;
-		actual = prox;
-		++i;
-			prox = actual - (functions.e(actual)*(actual-anterior)/(functions.e(actual)-functions.e(anterior)));
-		anterior = actual;
-		actual = prox;
-		++i;
+	}
 	
-	
-	cout << "Cero teórico: " << (this->functions).cero_teorico() << endl;
+	cout << "Cero teórico: " << 1.0/(this->functions).cero_teorico() << endl;
 	cout << "Raiz obtenida: " << actual << endl;
 	cout << "Iteraciones: " << i << endl;
 	return actual;
@@ -159,20 +147,22 @@ float Metodos::Regula_falsi_f(){
 
 float Metodos::Regula_falsi_e(){
 	pair<float,float> xceros = (this->functions).semillas_biseccion_e();
-	float positivo = xceros.first;	/// = xn-1
-	float negativo = xceros.second;	/// = xn
+	//float positivo = xceros.first;	/// = xn-1
+	//float negativo = xceros.second;	/// = xn
+	float positivo = 0.9;
+	float negativo = 0.6;
 	float prox;	/// = xn+1
 	int i = 0;
 
 	while(!(this->criterios).criterio1_parar(i)){
-		prox = negativo - (functions.e(negativo)*(negativo-positivo)/(functions.e(negativo)-functions.e(positivo)));
+		prox = negativo - ((functions.e(negativo)*(negativo-positivo))/(functions.e(negativo)-functions.e(positivo)));
 		
 		if(prox > 0) positivo = prox;
 		else negativo = prox;
 		++i;
 	}
 	
-	cout << "Cero teórico: " << (this->functions).cero_teorico() << endl;
+	cout << "Cero teórico: " << 1.0/(this->functions).cero_teorico() << endl;
 	cout << "Raiz obtenida: " << prox << endl;
 	return prox;
 }
