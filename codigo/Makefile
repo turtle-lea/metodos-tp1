@@ -22,4 +22,6 @@ obj/criterios.o : src/criterios.cpp
 clean:
 	rm -f -r bin obj
 
-
+test1: folder obj/funciones.o obj/metodos.o obj/criterios.o
+	$(CC) -c src/test1.cpp -o obj/test1.o
+	$(CC) -o bin/test1 obj/test1.o obj/funciones.o obj/metodos.o obj/criterios.o
