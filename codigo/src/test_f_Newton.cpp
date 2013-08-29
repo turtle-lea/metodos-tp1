@@ -21,6 +21,7 @@ int main()
 		Criterios cs(maxIter,prec);
 		Metodos ms(fs,cs);
 		cin >> criterio;
+		cout << alfa << endl;
 		ms.test_f_Newton(cout,criterio);
 		cin >> c;
 	}
