@@ -31,7 +31,7 @@ class Criterios{
 		//	4:Error absoluto
 		//	5:Distancia absoluta de valores de iteraciones sucesivas
 		//	6:Distancia relativa de valores de iteraciones sucesivas
-		bool criterios(int selector, int maxIter,float x,float x_anterior);
+		bool criterios(int selector, int maxIter,float x,float x_anterior,float f_x,float f_x_anterior);
 
 	private:
 		int max_iter;

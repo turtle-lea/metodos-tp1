@@ -18,6 +18,7 @@ class Metodos{
 		float Biseccion_f(int);
 		float Biseccion_e(int);
 		float Newton_f(int);
+		void test_f_Newton(ostream&,int);
 		float Newton_e(int);
 		float Regula_falsi_f(int);
 		float Regula_falsi_e(int);

@@ -13,7 +13,7 @@ float Metodos::Biseccion_f(int criterio){
 	float medio = positivo;
 	float anterior = negativo;
 
-	while (!(this->criterios).criterios(criterio,i,medio,anterior)){
+	while (!(this->criterios).criterios(criterio,i,medio,anterior,functions.f(medio),functions.f(anterior))){
 		anterior = medio;
 		medio = (positivo+negativo)/2;
 		
@@ -40,7 +40,7 @@ float Metodos::Biseccion_e(int criterio){
 	float negativo = seed.second;
 	float medio = positivo;
 	float anterior = negativo;
-	while (!(this->criterios).criterios(criterio,i,medio,anterior)){
+	while (!(this->criterios).criterios(criterio,i,medio,anterior,functions.e(medio),functions.e(anterior))){
 		anterior = medio;
 		medio = (positivo+negativo)/2;
 		
@@ -64,7 +64,7 @@ float Metodos::Newton_f(int criterio){
 	float actual;
 	int i = 0;
 
-	while(!(this->criterios).criterios(criterio,i,actual,anterior)){
+	while(!(this->criterios).criterios(criterio,i,actual,anterior,functions.f(actual),functions.f(anterior))){
 		actual = anterior - functions.f(anterior)/functions.f_deriv(anterior);
 		anterior = actual;
 		++i;
@@ -77,13 +77,27 @@ float Metodos::Newton_f(int criterio){
 	return actual;
 }
 
+void Metodos::test_f_Newton(ostream& os,int criterio){
+	//float anterior = Biseccion_f();
+	float anterior = 3.0;
+	float actual = 3.0;
+	int i = 0;
+	os << actual << " " << this->functions.f(actual) << endl;
+	while(!(this->criterios).criterios(criterio,i,actual,anterior,functions.f(actual),functions.f(anterior))){
+		actual = anterior - functions.f(anterior)/functions.f_deriv(anterior);
+		anterior = actual;
+		++i;
+		os << actual << " " << this->functions.f(actual) << endl;
+	}
+}
+
 float Metodos::Newton_e(int criterio){
 	//float anterior = Biseccion_e();
 	float anterior = 0.5;
 	float actual;
 	int i = 0;
 
-	while(!(this->criterios).criterios(criterio,i,actual,anterior)){
+	while(!(this->criterios).criterios(criterio,i,actual,anterior,functions.e(actual),functions.e(anterior))){
 		actual = anterior - functions.e(anterior)/functions.e_deriv(anterior);
 		anterior = actual;
 		++i;
@@ -104,7 +118,7 @@ float Metodos::Secante_f(int criterio){
 	float prox;	/// = xn+1
 	int i = 0;
 
-	while(!(this->criterios).criterios(criterio,i,actual,anterior)){
+	while(!(this->criterios).criterios(criterio,i,actual,anterior,functions.f(actual),functions.f(anterior))){
 		prox = actual - (functions.f(actual)*(actual-anterior)/(functions.f(actual)-functions.f(anterior)));
 		anterior = actual;
 		actual = prox;
@@ -127,7 +141,7 @@ float Metodos::Secante_e(int criterio){
 	float prox;	/// = xn+1
 	int i = 0;
 
-	while(!(this->criterios).criterios(criterio,i,actual,anterior)){
+	while(!(this->criterios).criterios(criterio,i,actual,anterior,functions.e(actual),functions.e(anterior))){
 		prox = actual - ((functions.e(actual)*(actual-anterior))/(functions.e(actual)-functions.e(anterior)));
 		anterior = actual;
 		actual = prox;
@@ -148,7 +162,7 @@ float Metodos::Regula_falsi_f(int criterio){
 	float prox;	/// = xn+1
 	int i = 0;
 
-	while(!(this->criterios).criterios(criterio,i,negativo,positivo)){
+	while(!(this->criterios).criterios(criterio,i,negativo,positivo,functions.f(negativo),functions.f(positivo))){
 		prox = negativo - (functions.f(negativo)*(negativo-positivo)/(functions.f(negativo)-functions.f(positivo)));
 		
 		if(prox > 0) positivo = prox;
@@ -172,7 +186,7 @@ float Metodos::Regula_falsi_e(int criterio){
 	float prox;	/// = xn+1
 	int i = 0;
 
-	while(!(this->criterios).criterios(criterio,i,negativo,positivo)){
+	while(!(this->criterios).criterios(criterio,i,negativo,positivo,functions.e(negativo),functions.e(positivo))){
 		prox = negativo - ((functions.e(negativo)*(negativo-positivo))/(functions.e(negativo)-functions.e(positivo)));
 		
 		if(prox > 0) positivo = prox;

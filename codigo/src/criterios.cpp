@@ -23,7 +23,7 @@ bool Criterios::criterio4_bis_parar(float y, float y_anterior){
 	return abs(y - y_anterior) / abs(y_anterior) < (this->epsilon);
 }
 
-bool Criterios::criterios(int selector, int numIter,float x,float x_anterior)
+bool Criterios::criterios(int selector, int numIter,float x,float x_anterior,float f_x,float f_anterior)
 {
 	bool esPrimeraIteracion = numIter == 0; //Si fuese la primera iteracion, no desearia que se detenga
 	if(!esPrimeraIteracion){
@@ -39,13 +39,13 @@ bool Criterios::criterios(int selector, int numIter,float x,float x_anterior)
 					return criterio2_bis_parar(x,x_anterior);
 					break;
 				case 4:
-					return criterio3_parar(x);
+					return criterio3_parar(f_x);
 					break;
 				case 5:
-					return criterio4_parar(x,x_anterior);
+					return criterio4_parar(f_x,f_anterior);
 					break;
 				case 6:
-					return criterio4_bis_parar(x,x_anterior);
+					return criterio4_bis_parar(f_x,f_anterior);
 					break;
 				default:
 					return false;
