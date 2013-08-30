@@ -26,6 +26,6 @@ test1: folder obj/funciones.o obj/metodos.o obj/criterios.o
 	$(CC) -c src/test1.cpp -o obj/test1.o
 	$(CC) -o bin/test1 obj/test1.o obj/funciones.o obj/metodos.o obj/criterios.o
 
-tests: folder obj/funciones.o obj/metodos.o obj/criterios.o
-	$(CC) -c src/test_f_Newton.cpp -o obj/test_f_Newton.o
-	$(CC) -o bin/test_f_Newton obj/test_f_Newton.o obj/funciones.o obj/metodos.o obj/criterios.o
+tester: folder obj/funciones.o obj/metodos.o obj/criterios.o
+	$(CC) -c src/tester.cpp -o obj/tester.o
+	$(CC) -o bin/tester obj/tester.o obj/funciones.o obj/metodos.o obj/criterios.o

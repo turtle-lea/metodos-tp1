@@ -22,7 +22,7 @@ int main()
 		Metodos ms(fs,cs);
 		cin >> criterio;
 		cout << alfa << endl;
-		ms.test_f_Newton(cout,criterio);
+		ms.Newton_f(criterio,cout);
 		cin >> c;
 	}
 	return 0;
