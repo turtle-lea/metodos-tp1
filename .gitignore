@@ -6,3 +6,10 @@
 #Logs and databases#
 
 *.log
+
+#Misc files#
+*.directory
+*.*~
+*.*.backup
+*.aux
+*.toc
