@@ -6,45 +6,15 @@ import numpy
 #Quiero que para un determinado metodos haga la prueba con todos los criterios
 #para distintos ordenes de magnitud de epsilon
 
-#def modificar_test_criterio(archivo,c):
-	#filename = open(archivo,"r+")
-	#entrada = filename.readline()
-	#filename.seek(0)
-	#entrada = entrada.split()
-	#entrada = " ".join(entrada)
-	#filename.write(entrada)
-	#filename.close()
-
-#def modificar_test_epsilon(archivo,e):
-#	with open(archivo,"r+") as filename:
-#		entrada = filename.readline()
-#		filename.seek(0)
-#		entrada = entrada.split()
-#		entrada[2] = str(e)
-#		entrada = " ".join(entrada)
-#		filename.write(entrada)
-#	filename.closed
-#
-#def modificar_test_alpha(archivo,alpha):
-#	filename = open(archivo,"r+")
-#	entrada = filename.readline()
-#	filename.seek(0)
-#	entrada = entrada.split()
-#	entrada[0] = str(alpha)
-#	entrada = " ".join(entrada)
-#	filename.write(entrada)
-#	filename.close()
-
-
-os.system("mkdir -p experimentos/newton_f")
+os.system("mkdir -p experimentos/exp1/newton_f")
 precision = [10**(-i) for i in range(4,9)]
 max_iter = 20
-#valores_alpha = numpy.arange(0.,10.,1)
-valores_alpha = [0,1]
+#valores_alpha = numpy.arange(1.,100.,10)
+valores_alpha = [5.25]
 
 for alpha in valores_alpha:
 	nombre_alpha = "alpha_"+str(alpha)	
-	nombre_dir_alpha = "experimentos/newton_f/"+nombre_alpha+"/"
+	nombre_dir_alpha = "experimentos/exp1/newton_f/"+nombre_alpha+"/"
 	os.system("mkdir "+nombre_dir_alpha)
 
 	for e in precision:
@@ -66,8 +36,9 @@ for alpha in valores_alpha:
 			filename_1 = "test_"+str(i)+".in"
 			filename_2 = "test_"+str(i)+".out"
 			
+			#os.system("cat test.out && echo \n")
 			#Llamo al graficador
-			graficador.graficador("test.out",nombre_dir_precision,i)
+			graficador.graficador_exp1("test.out",nombre_dir_precision,i)
 
 			#Renombro los archivos#
 			os.system("cp test.in "+ filename_1)
@@ -77,7 +48,7 @@ for alpha in valores_alpha:
 		
 			os.system("rm test.in")
 
-os.system("echo terminado para alpha = "+str(alpha))
+	os.system("echo terminado para alpha = "+str(alpha))
 
 
 
