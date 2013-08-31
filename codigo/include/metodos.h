@@ -26,6 +26,7 @@ class Metodos{
 		float Secante_e(int,ostream&);
 
 		float cero_teorico(){return functions.cero_teorico();}
+		float cero_teorico_e(){return functions.cero_teorico_e();}
 	private:
 		Funciones functions;
 		Criterios criterios;
