@@ -4,7 +4,6 @@
 #include <iostream>
 #include <cmath>
 using namespace std;
-// Vamos a trabajar con precision double o float ??
 
 class Funciones{
 
@@ -12,7 +11,7 @@ class Funciones{
 		Funciones(){}
 		Funciones(float x){alpha = x;} 
 
-		// f corresponde al primer experimento para obtener 1/sqrt(alpha) 
+		// f corresponde al primer experimento para obtener sqrt(alpha) 
 		float f(float x){return x*x - this->alpha;}
 		float f_deriv(float x){return 2.0*x;}
 		pair<float,float> semillas_biseccion_f();
@@ -23,11 +22,10 @@ class Funciones{
 		pair<float,float> semillas_biseccion_e();
 
 		float cero_teorico(){return sqrt(alpha);}
+		float cero_teorico_e(){return 1.0/sqrt(alpha);}
 		float get_alpha(){return alpha;}
 
 	private:
-		//Parece loco, pero es el único atributo que necesitamos.
-		//lo demás está harcodeado.
 		float alpha;
 };
 
