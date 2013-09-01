@@ -13,7 +13,7 @@ using namespace std;
  */
 
 
-pair<float,float> Funciones::semillas_biseccion_f(){
+pair<float,float> Funciones::semillas_biseccion_f(int cantItDeseadas){
 	pair<float,float> res;
 	if (abs(this->alpha) < 1){
 		res.first = 1.0;
@@ -26,27 +26,56 @@ pair<float,float> Funciones::semillas_biseccion_f(){
 			res.second = 1.0;
 		}
 	}
+	int i = 0;
+	float positivo = res.first;
+	float negativo = res.second;
+	float medio;
+
+	while (i < cantItDeseadas){
+		medio = (positivo+negativo)/2;
+		if (f(medio) < 0 ){
+			negativo = medio;
+			res.second = medio;
+		}
+		else{
+			positivo = medio;
+			res.first = medio;
+		}
+		i++;
+	}
 	return res;
 }
 
-
-pair<float,float> Funciones::semillas_biseccion_e(){
+pair<float,float> Funciones::semillas_biseccion_e(int cantItDeseadas){
 	pair<float,float> res;
 	if (abs(this->alpha) > 1){
 		res.first = 1.0/alpha;
 		res.second = alpha;
 	}
-	else {
+	else{
 		if (alpha == 1.0) { res.first = alpha ; res.second = alpha ; }
 		else{
 			res.first = alpha;
 			res.second = 1.0/alpha;
 		}
 	}
+	int i = 0;
+	float positivo = res.first;
+	float negativo = res.second;
+	float medio;
 
-	cout << "Positivo: " << res.first << endl;
-	cout << "Negativo: " << res.second << endl;
-
+	while (i < cantItDeseadas){
+		medio = (positivo+negativo)/2;
+		
+		if(e(medio) < 0 ){
+			negativo = medio;
+			res.second = medio;
+		}
+		else{
+			positivo = medio;
+			res.first = medio;
+		}
+		i++;
+	}
 	return res;
 }
-
