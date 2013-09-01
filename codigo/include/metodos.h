@@ -13,47 +13,47 @@ class Metodos{
 	public:
 		Metodos(){}
 		Metodos(const Funciones& fs, const Criterios& cs): criterios(cs),functions(fs){}
-		float Biseccion_f(int,ostream&);
-		float Biseccion_e(int,ostream&);
+		double Biseccion_f(int,ostream&);
+		double Biseccion_e(int,ostream&);
 		
 		//Newton_f
-		float Newton_f(int,ostream&);
-		float Newton_f(int,ostream&,int cantItBis);
-		float Newton_f(int,ostream&,float seed);
-		float Newton_f_aux(int,ostream&,bool,int,float);
+		double Newton_f(int,ostream&);
+		double Newton_f(int,ostream&,int cantItBis);
+		double Newton_f(int,ostream&,double seed);
+		double Newton_f_aux(int,ostream&,bool,int,double);
 		
 		//Newton_e
-		float Newton_e(int,ostream&);
-		float Newton_e(int,ostream&,int cantItBis);
-		float Newton_e(int,ostream&,float seed);
-		float Newton_e_aux(int,ostream&,bool,int,float);
+		double Newton_e(int,ostream&);
+		double Newton_e(int,ostream&,int cantItBis);
+		double Newton_e(int,ostream&,double seed);
+		double Newton_e_aux(int,ostream&,bool,int,double);
 		
 		//Secante_f
-		float Secante_f(int,ostream&);
-		float Secante_f(int,ostream&,int cantItBis);
-		float Secante_f(int,ostream&,float seed1,float seed2);
-		float Secante_f_aux(int,ostream&,bool,int,float,float);
+		double Secante_f(int,ostream&);
+		double Secante_f(int,ostream&,int cantItBis);
+		double Secante_f(int,ostream&,double seed1,double seed2);
+		double Secante_f_aux(int,ostream&,bool,int,double,double);
 		
 		//Secante_e
-		float Secante_e(int,ostream&);
-		float Secante_e(int,ostream&,int cantItBis);
-		float Secante_e(int,ostream&,float seed1,float seed2);
-		float Secante_e_aux(int,ostream&,bool,int,float,float);
+		double Secante_e(int,ostream&);
+		double Secante_e(int,ostream&,int cantItBis);
+		double Secante_e(int,ostream&,double seed1,double seed2);
+		double Secante_e_aux(int,ostream&,bool,int,double,double);
 		
 		//Regula_falsi_f
-		float Regula_falsi_f(int,ostream&);
-		float Regula_falsi_f(int,ostream&,int cantItBis);
-		float Regula_falsi_f(int,ostream&,float seed1,float seed2);
-		float Regula_falsi_f_aux(int,ostream&,bool,int,float,float);
+		double Regula_falsi_f(int,ostream&);
+		double Regula_falsi_f(int,ostream&,int cantItBis);
+		double Regula_falsi_f(int,ostream&,double seed1,double seed2);
+		double Regula_falsi_f_aux(int,ostream&,bool,int,double,double);
 		
 		//Regula_falsi_e
-		float Regula_falsi_e(int,ostream&);
-		float Regula_falsi_e(int,ostream&,int cantItBis);
-		float Regula_falsi_e(int,ostream&,float seed1, float seed2);
-		float Regula_falsi_e_aux(int,ostream&,bool,int,float,float);
+		double Regula_falsi_e(int,ostream&);
+		double Regula_falsi_e(int,ostream&,int cantItBis);
+		double Regula_falsi_e(int,ostream&,double seed1, double seed2);
+		double Regula_falsi_e_aux(int,ostream&,bool,int,double,double);
 		
-		float cero_teorico(){return functions.cero_teorico();}
-		float cero_teorico_e(){return functions.cero_teorico_e();}
+		double cero_teorico(){return functions.cero_teorico();}
+		double cero_teorico_e(){return functions.cero_teorico_e();}
 	private:
 		Funciones functions;
 		Criterios criterios;

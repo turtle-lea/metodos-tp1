@@ -13,8 +13,8 @@ using namespace std;
  */
 
 
-pair<float,float> Funciones::semillas_biseccion_f(int cantItDeseadas){
-	pair<float,float> res;
+pair<double,double> Funciones::semillas_biseccion_f(int cantItDeseadas){
+	pair<double,double> res;
 	if (abs(this->alpha) < 1){
 		res.first = 1.0;
 		res.second = alpha;
@@ -27,9 +27,9 @@ pair<float,float> Funciones::semillas_biseccion_f(int cantItDeseadas){
 		}
 	}
 	int i = 0;
-	float positivo = res.first;
-	float negativo = res.second;
-	float medio;
+	double positivo = res.first;
+	double negativo = res.second;
+	double medio;
 
 	while (i < cantItDeseadas){
 		medio = (positivo+negativo)/2;
@@ -46,8 +46,8 @@ pair<float,float> Funciones::semillas_biseccion_f(int cantItDeseadas){
 	return res;
 }
 
-pair<float,float> Funciones::semillas_biseccion_e(int cantItDeseadas){
-	pair<float,float> res;
+pair<double,double> Funciones::semillas_biseccion_e(int cantItDeseadas){
+	pair<double,double> res;
 	if (abs(this->alpha) > 1){
 		res.first = 1.0/alpha;
 		res.second = alpha;
@@ -60,9 +60,9 @@ pair<float,float> Funciones::semillas_biseccion_e(int cantItDeseadas){
 		}
 	}
 	int i = 0;
-	float positivo = res.first;
-	float negativo = res.second;
-	float medio;
+	double positivo = res.first;
+	double negativo = res.second;
+	double medio;
 
 	while (i < cantItDeseadas){
 		medio = (positivo+negativo)/2;

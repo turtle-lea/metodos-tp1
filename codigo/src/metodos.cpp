@@ -5,14 +5,14 @@
 
 using namespace std;
 
-float Metodos::Biseccion_f(int criterio,ostream& os){
+double Metodos::Biseccion_f(int criterio,ostream& os){
 	int i = 0;
-	float res;
-	pair<float, float> seed = functions.semillas_biseccion_f(0);
-	float positivo = seed.first;
-	float negativo = seed.second;
-	float medio = positivo;//X_1
-	float anterior = negativo;//X_0
+	double res;
+	pair<double, double> seed = functions.semillas_biseccion_f(0);
+	double positivo = seed.first;
+	double negativo = seed.second;
+	double medio = positivo;//X_1
+	double anterior = negativo;//X_0
 
 	while (!criterios.criterios(criterio,i,medio,anterior,functions.f(medio),functions.f(anterior))){
 		anterior = medio;
@@ -34,14 +34,14 @@ float Metodos::Biseccion_f(int criterio,ostream& os){
 	return res;	
 }
 
-float Metodos::Biseccion_e(int criterio,ostream& os){
+double Metodos::Biseccion_e(int criterio,ostream& os){
 	int i = 0;
-	float res;
-	pair<float, float> seed = functions.semillas_biseccion_e(0);
-	float positivo = seed.first;
-	float negativo = seed.second;
-	float medio = positivo;//X_1
-	float anterior = negativo;//X_0
+	double res;
+	pair<double, double> seed = functions.semillas_biseccion_e(0);
+	double positivo = seed.first;
+	double negativo = seed.second;
+	double medio = positivo;//X_1
+	double anterior = negativo;//X_0
 	while (!criterios.criterios(criterio,i,medio,anterior,functions.e(medio),functions.e(anterior))){
 		anterior = medio;
 		medio = (positivo+negativo)/2;
@@ -62,25 +62,25 @@ float Metodos::Biseccion_e(int criterio,ostream& os){
 	return res;	
 }
 
-float Metodos::Newton_f(int criterio,ostream&os)
+double Metodos::Newton_f(int criterio,ostream&os)
 {
 	return Newton_f_aux(criterio,os,true,0,0.0);
 }
 
-float Metodos::Newton_f(int criterio,ostream &os,int cantItBis)
+double Metodos::Newton_f(int criterio,ostream &os,int cantItBis)
 {
 	return Newton_f_aux(criterio,os,true,cantItBis,0.0);
 }
 
-float Metodos::Newton_f(int criterio,ostream &os,float seed)
+double Metodos::Newton_f(int criterio,ostream &os,double seed)
 {
 	return Newton_f_aux(criterio,os,false,-1,seed);
 }
 
-float Metodos::Newton_f_aux(int criterio,ostream& os,bool hacerBiseccion, int cantItBis,float x_0){
-	float actual, anterior;
+double Metodos::Newton_f_aux(int criterio,ostream& os,bool hacerBiseccion, int cantItBis,double x_0){
+	double actual, anterior;
 	if(hacerBiseccion){
-		pair<float,float> seed =  functions.semillas_biseccion_f(cantItBis);
+		pair<double,double> seed =  functions.semillas_biseccion_f(cantItBis);
 		actual = seed.first;
 		anterior = seed.first;
 	}
@@ -90,9 +90,9 @@ float Metodos::Newton_f_aux(int criterio,ostream& os,bool hacerBiseccion, int ca
 	}
 	int i = 0;
 	os << actual << " " <<  functions.f(actual) << endl;
-	while(!criterios.criterios(criterio,i,actual,anterior,functions.f(actual),functions.f(anterior))){
-		actual = anterior - functions.f(anterior)/functions.f_deriv(anterior);
+	while(!criterios.criterios(criterio,i,actual,anterior,functions.f(actual),functions.f(anterior))){ 
 		anterior = actual;
+		actual = anterior - (functions.f(anterior)/functions.f_deriv(anterior));
 		++i;
 		os << actual << " " << functions.f(actual) << endl;
 	}
@@ -105,25 +105,25 @@ float Metodos::Newton_f_aux(int criterio,ostream& os,bool hacerBiseccion, int ca
 	return actual;
 }
 
-float Metodos::Newton_e(int criterio,ostream&os)
+double Metodos::Newton_e(int criterio,ostream&os)
 {
 	return Newton_e_aux(criterio,os,true,0,0.0);
 }
 
-float Metodos::Newton_e(int criterio,ostream &os,int cantItBis)
+double Metodos::Newton_e(int criterio,ostream &os,int cantItBis)
 {
 	return Newton_e_aux(criterio,os,true,cantItBis,0.0);
 }
 
-float Metodos::Newton_e(int criterio,ostream &os,float seed)
+double Metodos::Newton_e(int criterio,ostream &os,double seed)
 {
 	return Newton_e_aux(criterio,os,false,-1,seed);
 }
 
-float Metodos::Newton_e_aux(int criterio,ostream& os,bool hacerBiseccion, int cantItBis, float x_0){
-	float actual, anterior;
+double Metodos::Newton_e_aux(int criterio,ostream& os,bool hacerBiseccion, int cantItBis, double x_0){
+	double actual, anterior;
 	if(hacerBiseccion){
-		pair<float,float> seed =  functions.semillas_biseccion_e(cantItBis);
+		pair<double,double> seed =  functions.semillas_biseccion_e(cantItBis);
 		actual = seed.first;
 		anterior = seed.first;
 	}
@@ -134,8 +134,8 @@ float Metodos::Newton_e_aux(int criterio,ostream& os,bool hacerBiseccion, int ca
 	int i = 0;
 	os << actual << " " << functions.e(actual) << endl;
 	while(!criterios.criterios(criterio,i,actual,anterior,functions.e(actual),functions.e(anterior))){
-		actual = anterior - functions.e(anterior)/functions.e_deriv(anterior);
 		anterior = actual;
+		actual = anterior - functions.e(anterior)/functions.e_deriv(anterior);
 		++i;
 		os << actual << " " << functions.e(actual) << endl;
 	}
@@ -148,26 +148,26 @@ float Metodos::Newton_e_aux(int criterio,ostream& os,bool hacerBiseccion, int ca
 	return actual;
 }
 
-float Metodos::Secante_f(int criterio,ostream&os)
+double Metodos::Secante_f(int criterio,ostream&os)
 {
 	return Secante_f_aux(criterio,os,true,0,0.0,0.0);
 }
 
-float Metodos::Secante_f(int criterio,ostream &os,int cantItBis)
+double Metodos::Secante_f(int criterio,ostream &os,int cantItBis)
 {
 	return Secante_f_aux(criterio,os,true,cantItBis,0.0,0.0);
 }
 
-float Metodos::Secante_f(int criterio,ostream &os,float seed1,float seed2)
+double Metodos::Secante_f(int criterio,ostream &os,double seed1,double seed2)
 {
 	return Secante_f_aux(criterio,os,false,-1,seed1,seed2);
 }
 
 
-float Metodos::Secante_f_aux(int criterio,ostream& os,bool hacerBiseccion, int cantItBis,float seed1, float seed2){
-	float actual, anterior;
+double Metodos::Secante_f_aux(int criterio,ostream& os,bool hacerBiseccion, int cantItBis,double seed1, double seed2){
+	double actual, anterior;
 	if(hacerBiseccion){
-		pair<float,float> seed =  functions.semillas_biseccion_f(cantItBis);
+		pair<double,double> seed =  functions.semillas_biseccion_f(cantItBis);
 		anterior = seed.first;
 		actual = seed.second;
 	}
@@ -175,7 +175,7 @@ float Metodos::Secante_f_aux(int criterio,ostream& os,bool hacerBiseccion, int c
 		actual = seed1;
 		anterior = seed2;
 	}
-	float prox;	//X_2
+	double prox;	//X_2
 	int i = 0;
 
 	while(!criterios.criterios(criterio,i,actual,anterior,functions.f(actual),functions.f(anterior))){
@@ -194,25 +194,25 @@ float Metodos::Secante_f_aux(int criterio,ostream& os,bool hacerBiseccion, int c
 	return actual;
 }
 
-float Metodos::Secante_e(int criterio,ostream&os)
+double Metodos::Secante_e(int criterio,ostream&os)
 {
 	return Secante_e_aux(criterio,os,true,0,0.0,0.0);
 }
 
-float Metodos::Secante_e(int criterio,ostream &os,int cantItBis)
+double Metodos::Secante_e(int criterio,ostream &os,int cantItBis)
 {
 	return Secante_e_aux(criterio,os,true,cantItBis,0.0,0.0);
 }
 
-float Metodos::Secante_e(int criterio,ostream &os,float seed1,float seed2)
+double Metodos::Secante_e(int criterio,ostream &os,double seed1,double seed2)
 {
 	return Secante_e_aux(criterio,os,false,-1,seed1,seed2);
 }
 
-float Metodos::Secante_e_aux(int criterio,ostream& os,bool hacerBiseccion,int cantItBis,float seed1,float seed2){
-	float actual, anterior;
+double Metodos::Secante_e_aux(int criterio,ostream& os,bool hacerBiseccion,int cantItBis,double seed1,double seed2){
+	double actual, anterior;
 	if(hacerBiseccion){
-		pair<float,float> seed =  functions.semillas_biseccion_e(cantItBis);
+		pair<double,double> seed =  functions.semillas_biseccion_e(cantItBis);
 		anterior = seed.first;
 		actual = seed.second;
 	}
@@ -220,7 +220,7 @@ float Metodos::Secante_e_aux(int criterio,ostream& os,bool hacerBiseccion,int ca
 		actual = seed1;
 		anterior = seed2;
 	}
-	float prox;
+	double prox;
 	int i = 0;
 
 	while(!criterios.criterios(criterio,i,actual,anterior,functions.e(actual),functions.e(anterior))){
@@ -239,25 +239,25 @@ float Metodos::Secante_e_aux(int criterio,ostream& os,bool hacerBiseccion,int ca
 	return actual;
 }
 
-float Metodos::Regula_falsi_f(int criterio,ostream&os)
+double Metodos::Regula_falsi_f(int criterio,ostream&os)
 {
 	return Regula_falsi_f_aux(criterio,os,true,0,0.0,0.0);
 }
 
-float Metodos::Regula_falsi_f(int criterio,ostream &os,int cantItBis)
+double Metodos::Regula_falsi_f(int criterio,ostream &os,int cantItBis)
 {
 	return Regula_falsi_f_aux(criterio,os,true,cantItBis,0.0,0.0);
 }
 
-float Metodos::Regula_falsi_f(int criterio,ostream &os,float seed1,float seed2)
+double Metodos::Regula_falsi_f(int criterio,ostream &os,double seed1,double seed2)
 {
 	return Regula_falsi_f_aux(criterio,os,false,-1,seed1,seed2);
 }
 
-float Metodos::Regula_falsi_f_aux(int criterio,ostream& os,bool hacerBiseccion,int cantItBis,float seed1,float seed2){
-	float positivo, negativo;
+double Metodos::Regula_falsi_f_aux(int criterio,ostream& os,bool hacerBiseccion,int cantItBis,double seed1,double seed2){
+	double positivo, negativo;
 	if(hacerBiseccion){
-		pair<float,float> seed =  functions.semillas_biseccion_f(cantItBis);
+		pair<double,double> seed =  functions.semillas_biseccion_f(cantItBis);
 		positivo = seed.first;
 		negativo = seed.second;
 	}
@@ -266,7 +266,7 @@ float Metodos::Regula_falsi_f_aux(int criterio,ostream& os,bool hacerBiseccion,i
 		positivo = seed1;
 		negativo = seed2;
 	}
-	float prox;
+	double prox;
 	int i = 0;
 
 	while(!criterios.criterios(criterio,i,negativo,positivo,functions.f(negativo),functions.f(positivo))){
@@ -286,25 +286,25 @@ float Metodos::Regula_falsi_f_aux(int criterio,ostream& os,bool hacerBiseccion,i
 	return prox;
 }
 
-float Metodos::Regula_falsi_e(int criterio,ostream&os)
+double Metodos::Regula_falsi_e(int criterio,ostream&os)
 {
 	return Regula_falsi_e_aux(criterio,os,true,0,0.0,0.0);
 }
 
-float Metodos::Regula_falsi_e(int criterio,ostream &os,int cantItBis)
+double Metodos::Regula_falsi_e(int criterio,ostream &os,int cantItBis)
 {
 	return Regula_falsi_e_aux(criterio,os,true,cantItBis,0.0,0.0);
 }
 
-float Metodos::Regula_falsi_e(int criterio,ostream &os,float seed1,float seed2)
+double Metodos::Regula_falsi_e(int criterio,ostream &os,double seed1,double seed2)
 {
 	return Regula_falsi_e_aux(criterio,os,false,-1,seed1,seed2);
 }
 
-float Metodos::Regula_falsi_e_aux(int criterio,ostream& os,bool hacerBiseccion,int cantItBis,float seed1,float seed2){
-	float positivo, negativo;
+double Metodos::Regula_falsi_e_aux(int criterio,ostream& os,bool hacerBiseccion,int cantItBis,double seed1,double seed2){
+	double positivo, negativo;
 	if(hacerBiseccion){
-		pair<float,float> seed =  functions.semillas_biseccion_e(cantItBis);
+		pair<double,double> seed =  functions.semillas_biseccion_e(cantItBis);
 		positivo = seed.first;
 		negativo = seed.second;
 	}
@@ -313,7 +313,7 @@ float Metodos::Regula_falsi_e_aux(int criterio,ostream& os,bool hacerBiseccion,i
 		positivo = seed1;
 		negativo = seed2;
 	}
-	float prox;
+	double prox;
 	int i = 0;
 
 	while(!criterios.criterios(criterio,i,negativo,positivo,functions.e(negativo),functions.e(positivo))){

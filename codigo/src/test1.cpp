@@ -6,8 +6,8 @@ using namespace std;
 
 int main()
 {
-	float alfa;
-	float prec;
+	double alfa;
+	double prec;
 	int maxIter;
 	char c;
 	cin >> c;
@@ -29,7 +29,7 @@ int main()
 					cout << endl;
 
 					cout << "Biseccion e: " << endl << endl;
-					float aux = ms.Biseccion_e(c);
+					double aux = ms.Biseccion_e(c);
 					cout << endl;
 
 					cout << "Newton f: " << endl << endl;

@@ -6,8 +6,8 @@ using namespace std;
 
 int main()
 {
-	float alfa;
-	float prec;
+	double alfa;
+	double prec;
 	int maxIter;
 	int criterio;
 	char c;

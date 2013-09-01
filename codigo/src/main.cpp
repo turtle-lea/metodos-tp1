@@ -17,7 +17,7 @@ int main(){
 	cout << endl;
 
 	cout << "Biseccion e: " << endl << endl;
-	float aux = ms.Biseccion_e(1,cout);
+	double aux = ms.Biseccion_e(1,cout);
 	cout << endl;
 
 	cout << "Newton f: " << endl << endl;
