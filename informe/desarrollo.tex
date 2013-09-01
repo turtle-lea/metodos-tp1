@@ -1,1 +1,29 @@
- 
+Como habíamos mencionado anteriormente, el objetivo del trabajo es encontrar las raíces de $f(x)=x^{2} - \alpha$ y $e(x) = 1/x^{2} - \alpha$.
+Para resolver el problema, implementamos para ambas funciones los cuatro métodos iterativos vistos en clase : Bisección, Newton, Regula Falsi y Secante.
+La explicación y la base teórica de los mismos puede ser encontrada fácilmente en distintos libros de métodos numéricos, como
+por ejemplo: "Numerical Analysis, Burden \& Faires". 
+
+\subsection{Estructura del código}
+
+Antes de comenzar a escribir código decidimos realizar una breve etapa de diseño, en donde nos propusimos encapsular algunos comportamientos para poder escribir un programa
+más prolijo y legible.
+
+Lo primero que hicimos fue diseñar una clase llamada $Funciones$. La idea es la siguiente: sea $h$ la función que estamos analizando (podría ser tanto $f$ como $e$).
+Como los métodos requieren evaluar $h$ para calcular el valor de la sucesión en los términos siguientes (y algunos $h\_derivada$), sería bueno encapsular estos cálculos
+con un comportamiento similar al de una ''caja negra'' (la famosa caja negra). Esto es: en lugar de efectuar la operación en el scope de la función que ejecuta el método,
+invocamos a $Funciones.h(x)$ o $Funciones.h\_derivada(x)$, desligándonos de la forma en que estas están implementadas.
+
+Esto es particularmente notorio y beneficioso, por ejemplo, para el código de Newton\_e (i.e: método de Newton para la función $e$. De ahora en más utilizarmos esta notación
+para referirnos a los distintos algoritmos):
+
+$\displaystyle e\_deriv = \frac{-2}{x^{3}} \Rightarrow x_{n+1} = x_{n} - \frac{\frac{1}{x_{n}^2}-\alpha}{\frac{-2}{x_{n}^{3}}} \Rightarrow 
+x_{n+1} = x_{n} + \frac{(x_{n} - \alpha x_{n}^{3})}{2} $ 
+
+Newton\_e encapsula todos esos cálculos mediante las operaciones:
+
+~
+
+$x_{n+1} = x_{n} - \frac{Funciones.e(x_{n})}{Funciones.e\_deriv(x_{n})}$
+
+Luego dise\~namos una clase llamada $Criterios$ en base a dos cuestiones distintas. 
+
