@@ -17,18 +17,35 @@ def graficador_exp1(fuente,destino,i):
 	valores = [s[x] for x in range(3,len(s),2)]
 	
 	#Start plotting
-	t = np.linspace(0.,alpha, 1024, endpoint = True)
-	plot(t,t**2 - alpha, color="blue", linewidth = 2.0, linestyle="-", label= r'$x^{2}-\alpha$')
-	plot(t,t-(t**2-alpha)/2*t, color="black", linewidth = 2.0, linestyle="--", label= r'$f(x) = x - frac{f(x)}{f\_derivada(x)}$')
+	#Dominio para f
+	#t = np.linspace(0.,alpha, 1024, endpoint = True)
+
+	#Dominio para e
+	t = np.linspace(0.,40., 1024, endpoint = True)
+
+	#Plot generico
 	plot(t,t, color="green", linewidth = 2.0, linestyle="--", label= r'$f(x)=x$')
 	plot(iteraciones,valores, color="red", linewidth = 2.0 , linestyle = "None", marker = "o", label = r'$Iteraciones \ del \ metodo$')
 
-	#Adding legend
-	legend(loc='lower right')
+	#Analizando f 
+	#plot(t,t**2 - alpha, color="blue", linewidth = 2.0, linestyle="-", label= r'f(x) = $x^{2}-\alpha$')
+	#plot(t,t-(t**2-alpha)/2*t, color="black", linewidth = 2.0, linestyle="--", label= r'$y = x - frac{f(x)}{f\_derivada(x)}$')
 
-	#Setting limits
-	xlim(0., alpha*1.1)
-	ylim(-alpha*1.1, alpha*1.1)
+	#Analizando e
+	plot(t,1/(t**2) - alpha, color="blue", linewidth = 2.0, linestyle="-", label= r'$e(x) = \frac{1}{x^{2}}-\alpha$')
+	plot(t,t+(t**2-alpha*t**4)/2*t, color="black", linewidth = 2.0, linestyle="--", label= r'$y = x - \frac{e(x)}{e\_derivada(x)}$')
+		
+	#Adding legend
+	#legend(loc='lower right')
+	legend(loc='upper right')
+
+	#Setting limits f
+	#xlim(0., alpha*1.1)
+	#ylim(-alpha*1.1, alpha*1.1)
+
+	#Setting limits e
+	ylim(-5.0,5.0)	
+	xlim(0.,5.0)	
 
 	#Moving spines
 	ax = gca()

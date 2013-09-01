@@ -1,7 +1,7 @@
 import sys
 import os 
 import pylab
-import graficador
+import graficador_exp1
 import numpy
 
 #Quiero que para un determinado metodos haga la prueba con todos los criterios
@@ -14,8 +14,8 @@ nombre_metodo = sys.argv[2]
 #Cosas que pueden ser cambiadas segun el experimento
 precision = [10**(-i) for i in range(4,9)]
 max_iter = 20
-valores_alpha = numpy.arange(1.,21.,10)
-#valores_alpha = [5.25]
+#valores_alpha = numpy.arange(10.,30.,10)
+valores_alpha = [0.25]
 
 nombre_dir = "experimentos/"+nombre_exp+"/"+nombre_metodo+"/"
 os.system("mkdir -p "+nombre_dir)
@@ -46,7 +46,7 @@ for alpha in valores_alpha:
 			
 			#os.system("cat test.out && echo \n")
 			#Llamo al graficador
-			graficador.graficador_exp1("test.out",nombre_dir_precision,i)
+			graficador_exp1.graficador_exp1("test.out",nombre_dir_precision,i)
 
 			#Renombro los archivos#
 			os.system("cp test.in "+ filename_1)
