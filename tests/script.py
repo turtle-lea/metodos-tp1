@@ -1,3 +1,4 @@
+import sys
 import os 
 import pylab
 import graficador
@@ -6,15 +7,22 @@ import numpy
 #Quiero que para un determinado metodos haga la prueba con todos los criterios
 #para distintos ordenes de magnitud de epsilon
 
-os.system("mkdir -p experimentos/exp1/newton_f")
+
+nombre_exp = sys.argv[1]
+nombre_metodo = sys.argv[2]
+
+#Cosas que pueden ser cambiadas segun el experimento
 precision = [10**(-i) for i in range(4,9)]
 max_iter = 20
-#valores_alpha = numpy.arange(1.,100.,10)
-valores_alpha = [5.25]
+valores_alpha = numpy.arange(1.,21.,10)
+#valores_alpha = [5.25]
+
+nombre_dir = "experimentos/"+nombre_exp+"/"+nombre_metodo+"/"
+os.system("mkdir -p "+nombre_dir)
 
 for alpha in valores_alpha:
 	nombre_alpha = "alpha_"+str(alpha)	
-	nombre_dir_alpha = "experimentos/exp1/newton_f/"+nombre_alpha+"/"
+	nombre_dir_alpha = nombre_dir+nombre_alpha+"/"
 	os.system("mkdir "+nombre_dir_alpha)
 
 	for e in precision:
