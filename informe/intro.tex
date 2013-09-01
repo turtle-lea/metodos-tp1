@@ -1,6 +1,8 @@
 Durante el desarrollo de la mayoría de los proyectos en programación, como es el caso de la implementación de videojuegos como el Quake III, deben realizarse sucesivas operaciones matematicas para, por ejemplo, normalizar vectores o trabajar con diversas variables matemáticas. Así mismo, es de 
 suma importancia que estas operaciones se realicen en tiempo y forma, es decir, rápido y bien. Para ello, en ocasiones uno prefiere dejar de lado el uso de la FPU para en cambio utilizar métodos númericos que, luego de sucesivas iteraciones, alcancen una aproximación del valor deseado que se considere suficientemente precisa más rápidamente. Esta preferencia por los métodos iterativos termina acelerando todo el proyecto a largo plazo puesto que suelen ser muy numerosas las operaciones a realizar y muy costosas de hacer de forma exacta en la FPU.
 
+~
+
 En este trabajo práctico analizaremos cuatro de estos métodos para el cálculo de la raiz cuadrada de un número real positivo ($\alpha$): 
 \begin{itemize}
 	\item Newton-Raphson.
@@ -9,7 +11,9 @@ En este trabajo práctico analizaremos cuatro de estos métodos para el cálculo
 	\item Regula Falsi.
 \end{itemize}
 
-Estos se denominan métodos iterativos de punto fijo \footnote{http://math.fullerton.edu/mathews/n2003/FixedPointMod.html para más información, y unas animaciones didácticas: http://math.fullerton.edu/mathews/a2001/Animations/RootFinding/FixedPoint/FixedPoint.html} y en particular los usaremos para hallar las raíces de dos funciones a conocer:
+Estos se denominan métodos iterativos de punto fijo \footnote{http://math.fullerton.edu/mathews/n2003/FixedPointMod.html para más información, y unas animaciones didácticas: http://math.fullerton.edu/mathews/a2001/Animations/RootFinding/FixedPoint/FixedPoint.html} y a grandes rasgos, para hallar la raíz de una función $f(x)$ encuentran el punto fijo $p$ de una función auxiliar $g(x)$ (es decir, $g(p) = p$) de manera tal que $f(p) = 0$. 
+
+En particular los usaremos para hallar las raíces de dos funciones a conocer:
 
 \begin{itemize}
 	\item $f(x) = x^2 - \alpha$
@@ -21,11 +25,21 @@ Notar que hallar la raíz de $f(x)$ equivale a calcular el valor de $\sqrt{\alph
 
 \subsection{Breve descripción de los métodos}
 
-Newton-Raphson \footnote{http://nm.mathforcollege.com/topics/newton$\_$raphson.html} es un algoritmo eficiente para el problema de cero de funciones. Dado que converge cuadráticamente bajo ciertas hipótesis analizaremos exhaustivamente éste método implementado sobre ambas funciones. Luego decidiremos que métodos alternativos se pueden utilizar para cada función, dado que los restantes son más sencillos a nivel implementación pero su convergencia no es tan buena en comparación con el método de Newton, es decir, se aproximan más lentamente a la solución esperada.
+En general, los cuatro métodos son similares entre sí dado que todos ellos generan una sucesión de puntos que, en el mejor de los casos, tiende al valor que estamos buscando, es decir, converge a la raiz de la función. Sino decimos que el método diverge, y esto por lo general depende del valor inicial que tomemos (semilla). Es la rapidez con la que alcanzan dicho valor lo que los diferencia.
+
+%Se entiende por convergencia de un método numérico la garantía de que, al realizar un buen número de repeticiones (iteraciones), las aproximaciones obtenidas terminan por acercarse cada vez más al verdadero valor buscado.
+
+%En la medida en la que un método numérico requiera de un menor número de iteracciones que otro, para acercarse al valor numérico deseado, se dice que tiene una mayor rapidez de convergencia.
+
+~
+
+Newton-Raphson \footnote{http://nm.mathforcollege.com/topics/newton$\_$raphson.html} es un algoritmo eficiente para el problema de cero de funciones. Dado que converge cuadráticamente bajo ciertas hipótesis analizaremos exhaustivamente éste método implementado sobre ambas funciones. Luego decidiremos que métodos alternativos se pueden utilizar para cada función, dado que los restantes son más sencillos a nivel implementación pero su convergencia no es tan buena en comparación con el método de Newton, i.e. se aproximan más lentamente a la solución esperada.
 
 Bisección \footnote{http://nm.mathforcollege.com/topics/bisection$\_$method.html} por ejemplo posee una convergencia lineal, pero su utilidad recae en que siempre converge, aún con semillas (valores iniciales) muy alejadas del valor a encontrar, y es por esto que lo analizaremos no sólo como método alternativo sino también como generador de semillas para los demás métodos.
 
 Por otro lado, tanto Secante como Regula Falsi superan a Bisección en convergencia, pero no alcanzan a Newton (convergencia superlineal). Su problema recae en las hipótesis de convergencia. Más adelante veremos su desempeño en comparación con los métodos ya mencionados. 
 \footnote{http://nm.mathforcollege.com/topics/secant$\_$method.html $\&$ http://nm.mathforcollege.com/topics/false$\_$position.html}
+
+~
 
 A continuación, una detallada descripción del desarrollo del presente trabajo.
