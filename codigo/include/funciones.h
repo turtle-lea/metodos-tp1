@@ -14,12 +14,12 @@ class Funciones{
 		// f corresponde al primer experimento para obtener sqrt(alpha) 
 		float f(float x){return x*x - this->alpha;}
 		float f_deriv(float x){return 2.0*x;}
-		pair<float,float> semillas_biseccion_f();
+		pair<float,float> semillas_biseccion_f(int);
 
 		// e corresponde al segundo experimento para obtener 1/sqrt(alpha)
 		float e(float x){return 1.0/(x*x) - this->alpha;}		
 		float e_deriv(float x){ return (-2.0)/(x*x*x);}
-		pair<float,float> semillas_biseccion_e();
+		pair<float,float> semillas_biseccion_e(int);
 
 		float cero_teorico(){return sqrt(alpha);}
 		float cero_teorico_e(){return 1.0/sqrt(alpha);}

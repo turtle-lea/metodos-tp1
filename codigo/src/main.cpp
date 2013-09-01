@@ -13,35 +13,35 @@ int main(){
 
 
 	cout << "Biseccion f: " << endl;
-	ms.Biseccion_f(6);
+	ms.Biseccion_f(6,cout);
 	cout << endl;
 
 	cout << "Biseccion e: " << endl << endl;
-	float aux = ms.Biseccion_e(1);
+	float aux = ms.Biseccion_e(1,cout);
 	cout << endl;
 
 	cout << "Newton f: " << endl << endl;
-	ms.Newton_f(1);
+	ms.Newton_f(1,cout);
 	cout << endl;
 
 	cout << "Newton e: " << endl << endl;
-	ms.Newton_e(1);
+	ms.Newton_e(1,cout);
 	cout << endl;
 
 	cout << "Regula_falsi f: " << endl << endl;
-	ms.Regula_falsi_f(1);
+	ms.Regula_falsi_f(1,cout);
 	cout << endl;
 
 	cout << "Regula_falsi e: " << endl << endl;
-	ms.Regula_falsi_e(1);
+	ms.Regula_falsi_e(1,cout);
 	cout << endl;
 
 	cout << "Secante f: " << endl << endl;
-	ms.Secante_f(1);
+	ms.Secante_f(1,cout);
 	cout << endl;
 
 	cout << "Secante e: " << endl << endl;
-	ms.Secante_e(1);
+	ms.Secante_e(1,cout);
 	cout << endl;
 
 	return 0;
