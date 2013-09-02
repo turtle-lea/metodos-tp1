@@ -8,7 +8,7 @@ using namespace std;
 
 int main(){
 	//Formato del test.in: Alfa Funcion Metodo Criterio Precision MaxIter
-	double alfa, precision;
+	double alfa, prec;
 	int func,met, maxIter, criterio;
 	char c;
 	bool esFuncionValida,esMetodoValido,esCriterioValido;

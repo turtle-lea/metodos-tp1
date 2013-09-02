@@ -29,3 +29,7 @@ test1: folder obj/funciones.o obj/metodos.o obj/criterios.o
 tester: folder obj/funciones.o obj/metodos.o obj/criterios.o
 	$(CC) -c src/tester.cpp -o obj/tester.o
 	$(CC) -o bin/tester obj/tester.o obj/funciones.o obj/metodos.o obj/criterios.o
+	
+testearMetodos: folder folder obj/funciones.o obj/metodos.o obj/criterios.o
+	$(CC) -c src/testearMetodos.cpp -o obj/testearMetodos.o
+	$(CC) -o bin/testearMetodos obj/testearMetodos.o obj/funciones.o obj/metodos.o obj/criterios.o
