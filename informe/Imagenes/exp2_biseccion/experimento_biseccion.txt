@@ -1,5 +1,6 @@
 MAX_IT : 30
 EPSILON : 0.00000001
 CRITERIO : 3
+alpha : 5.25
 
 CONCLUSION: 5 iteraciones de biseccion es lo mejor.
