@@ -1,0 +1,23 @@
+Pasar por stdin al archivo con los parámetros para las funciones de la siguiente manera
+
+"Alfa Funcion Metodo Criterio Precision MaxIter"
+
+donde 
+	Alfa el valor del parámetro al cual se quiere hallar la aproximación
+	Funcion puede valer 
+					"1" para f(x)
+					"2" para e(x)
+	Metodo puede valer
+					"1" para Biseccion
+					"2" para Newton
+					"3" para Secante
+					"4" para Regula Falsi
+	Criterio puede valer
+					"1" Maximo Iteraciones
+					"2" Distancia absoluta de iteraciones sucesivas
+					"3" Distancia relativa de iteraciones sucesivas
+					"4" Error absoluto
+					"5" Distancia absoluta de valores de iteraciones sucesivas
+					"6" Distancia relativa de valores de iteraciones sucesivas
+	Precision es el valor del epsilon utilizado para las criterios de parada
+	MaxIter es la cantidad máxima de iteraciones permitidas.
