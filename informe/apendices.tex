@@ -26,6 +26,103 @@ variante seleccionar\'ia para su utilizaci\'on en la pr\'actica.
 
 \subsection{Apéndice B: Código}
 
+M\'etodo de Newton para la funci\'on $f(x)$:
+
+\begin{verbatim}
+
+	double Metodos::Newton_f_aux(int criterio,ostream& os,bool hacerBiseccion,
+	                              int cantItBis,double x_0){
+	double actual, anterior;
+	if(hacerBiseccion){
+		pair<double,double> seed =  functions.semillas_biseccion_f(cantItBis);
+		actual = seed.first;
+		anterior = seed.first;
+	}
+	else{
+		actual = x_0;
+		anterior = x_0;
+	}
+	int i = 0;
+	os << actual << " " <<  functions.f(actual) << endl;
+	while(!criterios.criterios(criterio,i,actual,anterior,functions.f(actual),
+	      functions.f(anterior))){ 
+		anterior = actual;
+		actual = anterior - (functions.f(anterior)/functions.f_deriv(anterior));
+		++i;
+		os << actual << " " << functions.f(actual) << endl;
+	}
+	return actual;
+}
+\end{verbatim}
+
+M\'etodo de la secante para $f(x)$:
+
+\begin{verbatim}
+	double Metodos::Secante_f_aux(int criterio,ostream& os,bool hacerBiseccion, int cantItBis,
+	                              double seed1, double seed2){
+	double actual, anterior;
+	if(hacerBiseccion){
+		pair<double,double> seed =  functions.semillas_biseccion_f(cantItBis);
+		anterior = seed.first;
+		actual = seed.second;
+	}
+	else{
+		actual = seed1;
+		anterior = seed2;
+	}
+	double prox;	//X_2
+	int i = 0;
+	while(!criterios.criterios(criterio,i,actual,anterior,functions.f(actual),
+	           functions.f(anterior))){
+		prox = actual - 
+		  (functions.f(actual)*(actual-anterior)/
+		    (functions.f(actual)-functions.f(anterior)));
+		anterior = actual;
+		actual = prox;
+		++i;
+		os << prox << " " << functions.f(prox) << endl;
+	}
+	return actual;
+}
+\end{verbatim}
+
+M\'etodo $Regula-falsi$ para $f(x)$:
+
+\begin{verbatim}
+	double Metodos::Regula_falsi_f_aux(int criterio,ostream& os,bool hacerBiseccion,
+	                                   int cantItBis,double seed1,double seed2){
+	double positivo, negativo;
+	if(hacerBiseccion){
+		pair<double,double> seed =  functions.semillas_biseccion_f(cantItBis);
+		positivo = seed.first;
+		negativo = seed.second;
+	}
+	else{
+		assert(functions.f(seed1)*functions.f(seed2) < 0);
+		positivo = seed1;
+		negativo = seed2;
+	}
+	double prox;
+	int i = 0;
+
+	while(!criterios.criterios(criterio,i,negativo,positivo,functions.f(negativo),
+	             functions.f(positivo))){
+		prox = negativo - 
+		 (functions.f(negativo)*(negativo-positivo)/
+		   (functions.f(negativo)-functions.f(positivo)));
+		
+		if(prox > 0) positivo = prox;
+		else negativo = prox;
+		++i;
+		os << prox << " " << functions.f(prox) << endl;
+	}
+	return prox;
+}
+\end{verbatim}
+
+No se incluyen los c\'odigos para la funci\'on $e(x)$ ya que son exactamente id\'enticos, cambiando $f(x)$ y $f_deriv(x)$ por $e(x)$ y $e_deriv(x)$ respectivamente.
+
+
 \subsection{Apéndice C: Demostración}
 
 Sea $f(x) = x^2 -a$ una funci\'on a la cual se le quiere encontrar raices.Para ello se propone una sucesi\'on de punto fijo $x_{n+1} = g(x_n) = \frac{1}{2}\left(x_n+ \frac{a}{x_n}\right)$. Veamos si efectivamente $g(x)$ corresponde con el m\'etodo de Newton.
