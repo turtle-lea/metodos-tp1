@@ -17,7 +17,7 @@ int main(){
 		cin.putback(c);
 		cin >> alfa;
 		cin >> func;
-		esFuncionValida = (func == 1 || func == 2);
+		esFuncionValida = ((int)func == (int)1 || (int)func == (int)2);
 		if(!esFuncionValida){
 			cout << "No es una funcion valida.\n";
 			break;
@@ -73,6 +73,7 @@ int main(){
 				}
 				break;
 		}
+	break;
 	}
 	return 0;
 }
