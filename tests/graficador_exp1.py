@@ -18,34 +18,37 @@ def graficador_exp1(fuente,destino,i):
 	
 	#Start plotting
 	#Dominio para f
-	#t = np.linspace(0.,alpha, 1024, endpoint = True)
+	t = np.linspace(0.,alpha, 1024, endpoint = True)
 
 	#Dominio para e
-	t = np.linspace(0.,40., 1024, endpoint = True)
+	#t = np.linspace(0.,40., 1024, endpoint = True)
 
 	#Plot generico
 	plot(t,t, color="green", linewidth = 2.0, linestyle="--", label= r'$f(x)=x$')
-	plot(iteraciones,valores, color="red", linewidth = 2.0 , linestyle = "None", marker = "o", label = r'$Iteraciones \ del \ metodo$')
+	plot(iteraciones,valores, color="red", linewidth = 2.0 , linestyle = "None", marker = "o", label = r'$Iteraciones \ biseccion \ e$')
 
 	#Analizando f 
+	plt.xlabel('xlabel',fontsize=18)
+	plt.ylabel('ylabel',fontsize=18)
 	#plot(t,t**2 - alpha, color="blue", linewidth = 2.0, linestyle="-", label= r'f(x) = $x^{2}-\alpha$')
-	#plot(t,t-(t**2-alpha)/2*t, color="black", linewidth = 2.0, linestyle="--", label= r'$y = x - frac{f(x)}{f\_derivada(x)}$')
+	#plot(t,t-(t**2-alpha)/2*t, color="black", linewidth = 2.0, linestyle="--", label= r'$y = x - \frac{f(x)}{f\_derivada(x)}$')
 
 	#Analizando e
 	plot(t,1/(t**2) - alpha, color="blue", linewidth = 2.0, linestyle="-", label= r'$e(x) = \frac{1}{x^{2}}-\alpha$')
-	plot(t,t+(t**2-alpha*t**4)/2*t, color="black", linewidth = 2.0, linestyle="--", label= r'$y = x - \frac{e(x)}{e\_derivada(x)}$')
+	plot(t,t+(t-alpha*t**3)/2, color="black", linewidth = 2.0, linestyle="--", label= r'$y = x - \frac{e(x)}{e\_derivada(x)}$')
 		
 	#Adding legend
-	#legend(loc='lower right')
-	legend(loc='upper right')
+	legend(loc='lower right')
+	#legend(loc='upper right')
 
 	#Setting limits f
 	#xlim(0., alpha*1.1)
 	#ylim(-alpha*1.1, alpha*1.1)
 
 	#Setting limits e
-	ylim(-5.0,5.0)	
-	xlim(0.,5.0)	
+	xlim(cero_teorico - cero_teorico/10, cero_teorico + cero_teorico/10)
+	ylim(-0.5,0.5)
+
 
 	#Moving spines
 	ax = gca()
@@ -55,6 +58,13 @@ def graficador_exp1(fuente,destino,i):
 	ax.spines['bottom'].set_position(('data',0))
 	ax.yaxis.set_ticks_position('left')
 	ax.spines['left'].set_position(('data',0))
+
+	xlabel("x")
+	ylabel("y")
+	ax.xaxis.set_label_coords(1.05, 0.500)
+	ax.yaxis.set_label_coords(0.0, 1.05)
+	#ax.xaxis.set_label_position('top') 
+	#ylabel("y", verticalalignment= "top", horizontalalignment= "left")
 
 	#Anoto para que se muestre el cero_teorico
 	plot([cero_teorico,cero_teorico],[-(alpha*1.25),alpha**2], color ='red', linewidth=2.5, linestyle="--")
