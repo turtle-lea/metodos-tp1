@@ -25,12 +25,6 @@ double Metodos::Biseccion_f(int criterio,ostream& os){
 		i++;
 		os << res << " " << functions.f(res) << endl;
 	}
-	/*
-	cout << "Cero teórico: " << (this->functions).cero_teorico() << endl;
-	cout << "Raiz obtenida: " << res << endl; 
-	cout << "Me dio un buen cero ? El error es de: " << abs((this->functions).f(res)) << endl;
-	cout << "Cant. iter. realizadas: " << i << endl;
-	*/
 	return res;	
 }
 
@@ -53,12 +47,6 @@ double Metodos::Biseccion_e(int criterio,ostream& os){
 		i++;
 		os << res << " " << functions.e(res) << endl;
 	}
-	/*
-	cout << "Cero teórico: " << 1.0/(this->functions).cero_teorico() << endl;
-	cout << "Raiz obtenida: " << res << endl;
-	cout << "Me dio un buen cero ? El error es de: " << abs((this->functions).e(res)) << endl;
-	cout << "Cant. iter. realizadas: " << i << endl;
-	*/
 	return res;	
 }
 
@@ -96,12 +84,6 @@ double Metodos::Newton_f_aux(int criterio,ostream& os,bool hacerBiseccion, int c
 		++i;
 		os << actual << " " << functions.f(actual) << endl;
 	}
-	/*
-	cout << "Cero teórico: " << (this->functions).cero_teorico() << endl;
-	cout << "Raiz obtenida: " << actual << endl;
-	cout << "Me dio un buen cero ? El error es de: " << abs((this->functions).f(actual)) << endl;
-	cout << "Cant. iter. realizadas: " << i << endl;
-	*/
 	return actual;
 }
 
@@ -139,12 +121,6 @@ double Metodos::Newton_e_aux(int criterio,ostream& os,bool hacerBiseccion, int c
 		++i;
 		os << actual << " " << functions.e(actual) << endl;
 	}
-	/*
-	cout << "Cero teórico: " << 1.0/(this->functions).cero_teorico() << endl;
-	cout << "Raiz obtenida: " << actual << endl;
-	cout << "Me dio un buen cero ? El error es de: " << abs((this->functions).e(actual)) << endl;
-	cout << "Cant. iter. realizadas: " << i << endl;
-	*/
 	return actual;
 }
 
@@ -185,12 +161,6 @@ double Metodos::Secante_f_aux(int criterio,ostream& os,bool hacerBiseccion, int 
 		++i;
 		os << prox << " " << functions.f(prox) << endl;
 	}
-	/*
-	cout << "Cero teórico: " << (this->functions).cero_teorico() << endl;
-	cout << "Raiz obtenida: " << actual << endl;
-	cout << "Me dio un buen cero ? El error es de: " << abs((this->functions).f(actual)) << endl;
-	cout << "Cant. iter. realizadas: " << i << endl;
-	*/
 	return actual;
 }
 
@@ -230,12 +200,6 @@ double Metodos::Secante_e_aux(int criterio,ostream& os,bool hacerBiseccion,int c
 		++i;
 		os << prox << " " << functions.e(prox) << endl;
 	}
-	/*
-	cout << "Cero teórico: " << 1.0/(this->functions).cero_teorico() << endl;
-	cout << "Raiz obtenida: " << actual << endl;
-	cout << "Me dio un buen cero ? El error es de: " << abs((this->functions).e(actual)) << endl;
-	cout << "Cant. iter. realizadas: " << i << endl;
-	*/
 	return actual;
 }
 
@@ -277,12 +241,6 @@ double Metodos::Regula_falsi_f_aux(int criterio,ostream& os,bool hacerBiseccion,
 		++i;
 		os << prox << " " << functions.f(prox) << endl;
 	}
-	/*
-	cout << "Cero teórico: " << (this->functions).cero_teorico() << endl;
-	cout << "Raiz obtenida: " << prox << endl;
-	cout << "Me dio un buen cero ? El error es de: " << abs((this->functions).f(prox)) << endl;
-	cout << "Cant. iter. realizadas: " << i << endl;
-	*/
 	return prox;
 }
 
@@ -324,11 +282,5 @@ double Metodos::Regula_falsi_e_aux(int criterio,ostream& os,bool hacerBiseccion,
 		++i;
 		os << prox << " " << functions.e(prox) << endl;
 	}
-	/*
-	cout << "Cero teórico: " << 1.0/(this->functions).cero_teorico() << endl;
-	cout << "Raiz obtenida: " << prox << endl;
-	cout << "Me dio un buen cero ? El error es de: " << abs((this->functions).e(prox)) << endl;
-	cout << "Cant. iter. realizadas: " << i << endl;
-	*/
 	return prox;
 }
