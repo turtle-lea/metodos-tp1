@@ -20,12 +20,10 @@ pair<double,double> Funciones::semillas_biseccion_f(int cantItDeseadas){
 		res.second = alpha;
 	}
 	else { 
-		if(alpha == 1.0) { res.first = alpha ; res.second = alpha ;}
-		else{
-			res.first = alpha;
-			res.second = 1.0;
-		}
+		res.first = alpha;
+		res.second = 1.0;
 	}
+
 	int i = 0;
 	double positivo = res.first;
 	double negativo = res.second;
@@ -53,12 +51,10 @@ pair<double,double> Funciones::semillas_biseccion_e(int cantItDeseadas){
 		res.second = alpha;
 	}
 	else{
-		if (alpha == 1.0) { res.first = alpha ; res.second = alpha ; }
-		else{
-			res.first = alpha;
-			res.second = 1.0/alpha;
-		}
+		res.first = alpha;
+		res.second = 1.0/alpha;
 	}
+
 	int i = 0;
 	double positivo = res.first;
 	double negativo = res.second;
