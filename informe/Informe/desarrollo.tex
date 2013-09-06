@@ -67,7 +67,7 @@ independientes a los métodos que los utilizan.
 
 No surgieron inconvenientes demasiado importantes a la hora de pensar y escribir el código, por lo que procedimos a iniciar la experimentación.
 Comenzamos analizando el comportamiento de biseccion\_e y biseccion\_f, ya que asumimos que no tendrían mayores dificultades. Para ello, desarrollamos un método llamado
-$semilla\_biseccion\_h$, donde($h = f \ o \ e$), que devuelve 2 valores: $pos$ y $neg$ tales que $h(pos)\geq0$ y $h(neg)$ < 0. La ventaja fundamental de bisección
+$semilla\_biseccion\_h$, donde($h = f \ o \ h=e$), que devuelve 2 valores: $pos$ y $neg$ tales que $h(pos)\geq0$ y $h(neg)$ < 0. La ventaja fundamental de bisección
 se basa en los reducidos requisitos iniciales que exige para garantizar convergencia (simplemente encontrar 2 semillas tales que al evaluarlas en $h$ difieran en signo).
 
 
