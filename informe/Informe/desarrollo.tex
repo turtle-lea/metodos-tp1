@@ -70,6 +70,10 @@ Comenzamos analizando el comportamiento de biseccion\_e y biseccion\_f, ya que a
 $semilla\_biseccion\_h$, donde($h = f \ o \ h=e$), que devuelve 2 valores: $pos$ y $neg$ tales que $h(pos)\geq0$ y $h(neg)$ < 0. La ventaja fundamental de bisección
 se basa en los reducidos requisitos iniciales que exige para garantizar convergencia (simplemente encontrar 2 semillas tales que al evaluarlas en $h$ difieran en signo).
 
+Luego procedimos a analizar la convergencia de los métodos restantes: Newton, Secante y Regula\_Falsi, para ambas funciones. Para todos ellos las condiciones iniciales que garantizan
+convergencia son más restrictivas que las de bisección. Básicamente se reducen a encontrar una buena semilla que pertenezca a un entorno ''cercano'' a la raíz que queremos encontrar.
+En esta etapa de la experimentación, agregamos una opción en nuestros métodos que permite recibir por stdin (además de alpha), el valor de la semilla inicial con el que queremos que comiencen. 
+
 
 
 

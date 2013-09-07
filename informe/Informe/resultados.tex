@@ -14,6 +14,8 @@
 % 	\end{minipage}
 % \end{figure}
 
+\subsection{Primeras experimentaciones}
+
 \begin{figure}[!h]
 	\begin{center}
 		  \includegraphics[keepaspectratio]{../Imagenes/exp1/biseccion_f.pdf}
@@ -21,7 +23,7 @@
 		  \label{fig:contra1}
 	\end{center}
 \end{figure}
-
+\FloatBarrier
 ~
 
 \begin{figure}[!h]
@@ -31,7 +33,7 @@
 		  \label{fig:contra1}
 	\end{center}
 \end{figure}
-
+\FloatBarrier
 Los resultados tanto para $biseccion\_f$ como para $biseccion\_e$ fueron los esperados. Los métodos convergen al resultado para cualquier valor de $\alpha$ (Fueron evaluados valores entre 0 y 10000 aproximadamente,
 con bastante granularidad). Para realizar los gráficos fueron elegidos los valores de $\alpha$ 4.0 para $f$ y 6.0 para $e$ únicamente debido a que permiten utilizar una escala que nos deja apreciar los aspectos
 relevantes del análisis. Los puntos rojos corresponden al valor de $x$ en cada iteración del método. Con el correr de las iteradas, los puntos van amontonándose alrededor de la raíz teórica de la función.
@@ -51,4 +53,38 @@ Notemos que estamos utilizando el criterio (3) para analizar la calidad de la so
 
 Por lo general biseccion\_e se comprta peor que biseccion\_f (Terminar de pensar por qué)
 
+Contrariamente a lo que suponíamos, al analizar newton\_f \ descubrimos que, luego de fijar $\alpha$ (distinto de cero), el método converge para cualquier semilla inicial que tomemos (también distinta de 0).
+Pensemos un poco por qué sucede esto: 
+Anteriormente ya demostramos que si $seed\_inicial > \sqrt{\alpha}$ entonces el método converge (ejercicio 3 de la práctica). 
+Sin embargo, ¿ qué sucede cuando pertenece al itervalo $(0,\sqrt{\alpha})$. $x_1$ es el valor 
+obtenido a partir de la interesección entre la recta tangente a $f(x)$ en $(x_0,f(x_0)$ y el eje de abscisas. Experimentalmente parecería ser que el valor de $x_1$ obtenido luego de la primera 
+iteración es mayor a $\sqrt{\alpha}$. Este hecho puede explicarse en función la pendiente de la recta tangente en la semilla inicial. Como la misma tiene un valor peque\~no en módulo pero positivo
+(menor a $2*\sqrt{\alpha}$), no es ilógico pensar que cortará al eje de abscisas en un valor de $x$ mayor a  $\sqrt{\alpha}$. El siguiente gráfico intenta representar esta idea:  
 
+\begin{figure}[!h]
+	\begin{center}
+		  \includegraphics[keepaspectratio]{../Imagenes/exp1/recta_tangente.pdf}
+		  \caption{Recta tangente a la curva con $x_0=0.25$ y $\alpha=5.0$}
+		  \label{fig:contra1}
+	\end{center}
+\end{figure}
+\FloatBarrier
+
+Nótese que en los casos en donde $x_0$ comienza con valores peque\~nos en módulo obtenemos a partir de la primera iteración un $x\_1 >> \sqrt{\alpha}$. A medida que nos fuimos
+acercando por izquierda, para valores en donde $x_{0} \approx \sqrt{\alpha}$,
+experimentalmente también obtuvimos que $x\_1 > \sqrt{\alpha}$, lo cual explica el hecho de que newton\_f converja para cualquier semilla inicial.
+
+En el siguiente gráfico mostramos un ejemplo de convergencia de newton\_f. Observemos que, a diferencia de bisección, el método converge luego de unas pocas iteraciones: ya no se 
+produceese amontonamiento de puntos alrededor de la raíz teórica, a pesar de usar un epsilon 3 órdenes de magnitud más peque\~no 
+
+\begin{figure}[!h]
+	\begin{center}
+		  \includegraphics[keepaspectratio]{../Imagenes/exp1/newton_f.pdf}
+		  \caption{newton\_f para $\alpha=5.25, \epsilon=10^{-8}, \ criterio = 5, \ seed = 1.0$}
+		  \label{fig:contra1}
+	\end{center}
+\end{figure}
+\FloatBarrier
+
+En esta figura podemos apreciar por primera vez el comportamiento de una sucesión de punto fijo: el valor $c$ tal que $g(c)=c$ (donde $g(x) = x - \displaystyle \frac{f(x)}{f'(x)}$) es al mismo tiempo
+raíz de la función $f$
