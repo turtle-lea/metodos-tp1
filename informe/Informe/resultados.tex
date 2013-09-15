@@ -88,3 +88,22 @@ produceese amontonamiento de puntos alrededor de la raíz teórica, a pesar de u
 
 En esta figura podemos apreciar por primera vez el comportamiento de una sucesión de punto fijo: el valor $c$ tal que $g(c)=c$ (donde $g(x) = x - \displaystyle \frac{f(x)}{f'(x)}$) es al mismo tiempo
 raíz de la función $f$
+
+Los resultados para Newton\_e, por el contrario, resultaron ser bastante distintos. Al evaluar el método para distintos valores de $\alpha$, descubrimos que: si la semilla inicial está comprendida en el intervalo
+$(0,\frac{1}{\sqrt{\alpha}}]$ el método converge sin problemas. Sin embargo, empíricamente llegamos a la conclusión de que existe un $x_0$, con $x_0 > \frac{1}{sqrt{\alpha}}$, tal que $\forall x \geq x_0$, el método
+diverge si utilizamos x como semilla.
+
+\begin{figure}[!h]
+	\begin{center}
+		  \includegraphics[keepaspectratio]{../Imagenes/exp1/divergencia.pdf}
+		  \caption{Rectas tangentes a la función e con $\alpha=0.01, \frac{1}{\sqrt{\alpha}} = 10$ en $x_0= 23, x_1= -26.335, x_2=51.8184$ (primeras 3 iteraciones)}
+		  \label{fig:contra1}
+	\end{center}
+\end{figure}
+\FloatBarrier
+
+Este gráfico nos da una idea de la causa de la divergencia para determinados valores iniciales mayores a los de la raíz buscada. La pendiente de la recta tangente en un punto está determinada por la función
+e\_derivada: $\frac{-2}{x^{3}}$. Notemos que, luego de la primera iteración el valor obtenido es -26.335 $\Rightarrow$ el módulo de la pendiente de la recta tangente que pasa por $(x_1,e(x_1))$ es menor que
+el anterior. Como consecuencia, la intersección de esta recta con el eje x se produce en x=51.8184, valor considerablemente más alejado del 0 que el $x_0$ inicial. De esta manera, sucesivas iteraciones 
+generan puntos más distantes al 0, por lo que las pendientes de las rectas tangentes se vuelven cada vez menores en módulo, generando un círculo vicioso en donde el método diverge. Observemos cono la recta
+tangente correspondiente a $(x_2,e(x_2))$, de color negro, no llega a cortar al eje x debido a su peque\~na pendiente. De hecho, esto ocurre recién en x = -617.971.  
