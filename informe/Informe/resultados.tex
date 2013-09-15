@@ -90,7 +90,7 @@ En esta figura podemos apreciar por primera vez el comportamiento de una sucesi�
 raíz de la función $f$
 
 Los resultados para Newton\_e, por el contrario, resultaron ser bastante distintos. Al evaluar el método para distintos valores de $\alpha$, descubrimos que: si la semilla inicial está comprendida en el intervalo
-$(0,\frac{1}{\sqrt{\alpha}}]$ el método converge sin problemas. Sin embargo, empíricamente llegamos a la conclusión de que existe un $x_0$, con $x_0 > \frac{1}{sqrt{\alpha}}$, tal que $\forall x \geq x_0$, el método
+$(0,\frac{1}{\sqrt{\alpha}}]$ el método converge sin problemas. Sin embargo, empíricamente llegamos a la conclusión de que existe un $x_0$, con $x_0 > \frac{1}{\sqrt{\alpha}}$, tal que $\forall x \geq x_0$, el método
 diverge si utilizamos x como semilla.
 
 \begin{figure}[!h]
@@ -106,4 +106,23 @@ Este gráfico nos da una idea de la causa de la divergencia para determinados va
 e\_derivada: $\frac{-2}{x^{3}}$. Notemos que, luego de la primera iteración el valor obtenido es -26.335 $\Rightarrow$ el módulo de la pendiente de la recta tangente que pasa por $(x_1,e(x_1))$ es menor que
 el anterior. Como consecuencia, la intersección de esta recta con el eje x se produce en x=51.8184, valor considerablemente más alejado del 0 que el $x_0$ inicial. De esta manera, sucesivas iteraciones 
 generan puntos más distantes al 0, por lo que las pendientes de las rectas tangentes se vuelven cada vez menores en módulo, generando un círculo vicioso en donde el método diverge. Observemos cono la recta
-tangente correspondiente a $(x_2,e(x_2))$, de color negro, no llega a cortar al eje x debido a su peque\~na pendiente. De hecho, esto ocurre recién en x = -617.971.  
+tangente correspondiente a $(x_2,e(x_2))$, de color negro, no llega a cortar al eje x debido a su peque\~na pendiente. De hecho, esto ocurre recién en x = -617.971.
+
+Al estudiar la convergencia de Secante\_f obtuvimos resultados bastante similares a los de Newton\_f. Empíricamente, el método converge para cualquier par de valores iniciales. Los experimentos
+fueron probados para valores de $\alpha \in (0,1] \cup [1,20] \cup [1000,1010] \cup [10^{6},10^{6}+10]$, probando por cada valor distintos pares de semillas iniciales. Por ejemplo, con valores
+$x_0,x_1 \in (0,1]$, $x_0 \in (0,1] \ \wedge \ x_1 \in (1,20]$, $x_0 \in (0,1] \ \wedge \ x_1 \in [1000,1010]$ , etc.
+
+Estudiemos momentáneamente la estructura de cada iteración:
+
+$x_{n+1} = x_n - \frac{(x_n-x_{n-1})*f(x_n)}{f(x_n)-f(x_{n-1})}$
+
+De la fórmula se deduce que, si en algún momento $x_n = x_{n-1}$ entonces el método puede llegar a comportarse de una forma indeseada (Se realiza una división por cero, o un valor muy cercano a cero).
+Por este motivo, debemos cuidarnos fundamentalmente de 2 aspectos:
+
+a- No comenzar a iterar con semillas iniciales tales que $x_0 = x_1$.
+
+b- Parar las iteraciones cuando $x_n \approx x_{n-1}$. En el caso de utilizar malos criterios de parada, como por ejemplo el 1: i = max\_iter
+lo que sucede es que el método encuentra la raíz buscada y luego diverge, debido a que intenta continuar realizando las iteraciones.
+
+Con Secante\_e también obtuvimos resultados similares a los de Newton\_e. El método converge con seguridad cuando $x_0,x_1 \in (0,\frac{1}{\sqrt{\alpha}}]$ Si una de las 2 semillas es mucho mayor a la raíz, lo más
+probable es que el método diverja, ya que las rectas tangentes se comportan de forma muy parecida a las secantes.
