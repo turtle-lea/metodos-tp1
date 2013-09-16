@@ -126,3 +126,43 @@ lo que sucede es que el método encuentra la raíz buscada y luego diverge, debi
 
 Con Secante\_e también obtuvimos resultados similares a los de Newton\_e. El método converge con seguridad cuando $x_0,x_1 \in (0,\frac{1}{\sqrt{\alpha}}]$ Si una de las 2 semillas es mucho mayor a la raíz, lo más
 probable es que el método diverja, ya que las rectas tangentes se comportan de forma muy parecida a las secantes.
+
+~
+
+Finalmente, para cerrar con esta primera parte, a la cual llamamos \underline{Primeras experimentaciones}, incluímos tres gráficos correspondientes a Bisección\_e, Secante\_e y Newton\_e, con el objetivo de
+visualizar de forma más clara la forma en la que los métodos convergen a la raíz teórica en función de la cantidad de iteraciones. Todos ellos fueron graficados en función de los mismos datos: $\alpha = 0.01$,
+criterio de parada 2 y un error $\epsilon=10^{-8}$
+
+\begin{figure}[!h]
+	\begin{center}
+		  \includegraphics[keepaspectratio]{../Imagenes/exp2/biseccion_e.pdf}
+		  \caption{Método de bisección\_e con los parámetros anteriormente mencionados, y semillas iniciales: $x_0 = 100, x_1=\alpha=0.01$}
+		  \label{fig:contra1}
+	\end{center}
+\end{figure}
+\FloatBarrier
+
+Si bien en la figura anterior el método comienza con semillas bastante separadas (100 unidades aproximadamente), luego de la cuarta iteración la distancia entre ambas es solamente de 6 unidades, por lo que
+alcanza el punto en donde comienzan los otros métodos. Sin embargo, realiza 30 iteraciones y aún así no llega a encontrar un resultado con un error menor al exigido: $10^{-8}$
+
+\begin{figure}[!h]
+	\begin{center}
+		  \includegraphics[keepaspectratio]{../Imagenes/exp2/secante_e.pdf}
+		  \caption{Método de secante\_e con los parámetros anteriormente mencionados, y semillas iniciales: $x_0=1, x_1=11$ }
+		  \label{fig:contra1}
+	\end{center}
+\end{figure}
+\FloatBarrier
+
+El criterio de parada se alcanza luego de la 7ma iteración en este experimento de secante\_e.
+
+\begin{figure}[!h]
+	\begin{center}
+		  \includegraphics[keepaspectratio]{../Imagenes/exp2/newton_e.pdf}
+		  \caption{Método de newton\_e con los parámetros anteriormente mencionados, y semilla inicial: $x_0=11$}
+		  \label{fig:contra1}
+	\end{center}
+\end{figure}
+\FloatBarrier
+
+El criterio de parada se alcanza luego de la 6ta iteración en este experimento de Newton\_e.
