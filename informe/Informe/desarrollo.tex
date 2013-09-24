@@ -76,6 +76,28 @@ En esta etapa de la experimentación, agregamos una opción en nuestros métodos
 con el que queremos que comiencen. 
 
 
+\subsubsection{Fijando criterios de parada}
+
+En esta etapa de la experimentación procedimos a encontrar un buen criterio que se adaptara a las condiciones de nuestro problema: encontrar las raíces de $f$ y $e$.
+Para ello consideramos que un criterio se adapta a las condiciones cuando hace que el método encuentre una buena aproximación a la raíz
+teórica sin necesidad de realizar iteraciones innecesarias. 
+Los posibles criterios vistos en clase fueron: Error absoluto y relativo entre iteraciones sucesivas, error absoluto y relativo entre imágenes de iteraciones sucesivas y
+valor absoluto de la imagen actual (Ver apéndice: Criterios de parada).
+Antes de comenzar las pruebas realizamos una serie de análisis de las funciones y luego planteamos ciertas hipótesis respecto a lo que sucedería.
+
+Supongamos que queremos analizar el comportamiento del siguiente criterio:
+$|f(x_{n})| < \epsilon $
+
+¿Es este un buen criterio para encontrar la raíz de f? ¿Podría pasar que el método deje de iterar porque la cota ya ha sido alcanzada pero la solución obtenida esté lejos de la 
+raíz teórica?
+
+Sea $f(x) = x^{2} - \alpha$, y dos valores $a, \ b=(a+\delta) \  \in R$ Entonces $|f(a) - f(b)| = |a^{2} - \alpha $
+
+
+
+
+
+
 
 
 
