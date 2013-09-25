@@ -11,9 +11,14 @@ En este trabajo práctico analizaremos cuatro de estos métodos para el cálculo
 	\item Regula Falsi.
 \end{itemize}
 
-Estos se denominan métodos iterativos de punto fijo \footnote{http://math.fullerton.edu/mathews/n2003/FixedPointMod.html para más información, y unas animaciones didácticas: http://math.fullerton.edu/mathews/a2001/Animations/RootFinding/FixedPoint/FixedPoint.html} y a grandes rasgos, para hallar la raíz de una función $f(x)$ encuentran el punto fijo $p$ de una función auxiliar $g(x)$ (es decir, $g(p) = p$) de manera tal que $f(p) = 0$. 
+Estos se denominan métodos iterativos de punto fijo$^1$ y a grandes rasgos, para hallar la raíz de una función $f(x)$ encuentran el punto fijo $p$ de una función auxiliar $g(x)$ (es decir, $g(p) = p$) de manera tal que $f(p) = 0$. Las funciones $g(x)$ para Newton-Raphson y para Secante son las siguientes (en ese orden):
+\begin{itemize}
+	\item $\displaystyle x_n = g(x_{n-1}) = x_{n-1} - \frac{f(x_{n-1})}{f'(x_{n-1})}$
+	\item $\displaystyle x_n = g(x_{n-1}) = x_{n-1} - f(x_{n-1})*\frac{x_{n-2} - x_{n-1}}{f(x_{n-2}) - f(x_{n-1})}$
+\end{itemize}
 
-En particular los usaremos para hallar las raíces de dos funciones a conocer:
+Los métodos utilizan estas funciones para generar una sucesión de puntos que uno espera que converjan al punto fijo deseado. Regula-falsi utiliza la misma función que Secante, con la diferencia de que elige con que punto de los anteriores quedarse para seguir cumpliendo con sus hipótesis. Bisección en cambio no utiliza otra función dado que si bien es un método iterativo no es en realidad de punto fijo.
+En particular usaremos estos métodos para hallar las raíces de dos funciones $f(x)$ a conocer:
 
 \begin{itemize}
 	\item $f(x) = x^2 - \alpha$
@@ -33,12 +38,11 @@ En general, los cuatro métodos son similares entre sí dado que todos ellos gen
 
 ~
 
-Newton-Raphson \footnote{http://nm.mathforcollege.com/topics/newton$\_$raphson.html} es un algoritmo eficiente para el problema de cero de funciones. Dado que converge cuadráticamente bajo ciertas hipótesis analizaremos exhaustivamente éste método implementado sobre ambas funciones. Luego decidiremos que métodos alternativos se pueden utilizar para cada función, dado que los restantes son más sencillos a nivel implementación pero su convergencia no es tan buena en comparación con el método de Newton, i.e. se aproximan más lentamente a la solución esperada.
+Newton-Raphson$^2$ es un algoritmo eficiente para el problema de cero de funciones. Dado que converge cuadráticamente bajo ciertas hipótesis analizaremos exhaustivamente éste método implementado sobre ambas funciones. Luego decidiremos que métodos alternativos se pueden utilizar para cada función, dado que los restantes son más sencillos a nivel implementación pero su convergencia no es tan buena en comparación con el método de Newton, i.e. se aproximan más lentamente a la solución esperada.
 
-Bisección \footnote{http://nm.mathforcollege.com/topics/bisection$\_$method.html} por ejemplo posee una convergencia lineal, pero su utilidad recae en que siempre converge, aún con semillas (valores iniciales) muy alejadas del valor a encontrar, y es por esto que lo analizaremos no sólo como método alternativo sino también como generador de semillas para los demás métodos.
+Bisección$^3$ por ejemplo posee una convergencia lineal, pero su utilidad recae en que siempre converge, aún con semillas (valores iniciales) muy alejadas del valor a encontrar, y es por esto que lo analizaremos no sólo como método alternativo sino también como generador de semillas para los demás métodos.
 
-Por otro lado, tanto Secante como Regula Falsi superan a Bisección en convergencia, pero no alcanzan a Newton (convergencia superlineal). Su problema recae en las hipótesis de convergencia. Más adelante veremos su desempeño en comparación con los métodos ya mencionados. 
-\footnote{http://nm.mathforcollege.com/topics/secant$\_$method.html $\&$ http://nm.mathforcollege.com/topics/false$\_$position.html}
+Por otro lado, tanto Secante como Regula Falsi superan a Bisección en convergencia, pero no alcanzan a Newton (convergencia superlineal). Su problema recae en las hipótesis de convergencia. Más adelante veremos su desempeño en comparación con los métodos ya mencionados.$^4$ 
 
 ~
 

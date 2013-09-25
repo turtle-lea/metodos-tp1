@@ -37,3 +37,7 @@ testearMetodos: folder folder obj/funciones.o obj/metodos.o obj/criterios.o
 testearError: folder folder obj/funciones.o obj/metodos.o obj/criterios.o
 	$(CC) -c src/tester_error.cpp -o obj/tester_error.o
 	$(CC) -o bin/tester_error obj/tester_error.o obj/funciones.o obj/metodos.o obj/criterios.o
+
+testearBiseccion: folder obj/funciones.o obj/metodos.o obj/criterios.o
+	$(CC) -c src/tester_biseccion.cpp -o obj/tester_biseccion.o
+	$(CC) -o bin/tester_biseccion obj/tester_biseccion.o obj/funciones.o obj/metodos.o obj/criterios.o
