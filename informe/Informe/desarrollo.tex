@@ -91,7 +91,39 @@ $|f(x_{n})| < \epsilon $
 ¿Es este un buen criterio para encontrar la raíz de f? ¿Podría pasar que el método deje de iterar porque la cota ya ha sido alcanzada pero la solución obtenida esté lejos de la 
 raíz teórica?
 
-Sea $f(x) = x^{2} - \alpha$, y dos valores $a, \ b=(a+\delta) \  \in R$ Entonces $|f(a) - f(b)| = |a^{2} - \alpha $
+Sea $f(x) = x^{2} - \alpha$, y dos valores $a, \ b=(a+\delta) \  \in R$ Entonces $|f(a) - f(b)| = |a^{2} - \alpha - ((a+\delta)^{2} - \alpha )| = |a^{2} - \alpha - (a^{2}+\delta^{2}+2*a*\delta) + \alpha | =
+|-\delta^{2}-2*a*\delta|$
+
+Podemos deducir el hecho de que:
+
+Si $\delta$ es un valor peque\~no $\Rightarrow \ f(a) \approx f(b) $
+
+Si $\delta$ es un valor grande $\Rightarrow \ f(a) << f(b) $
+
+Por lo tanto, si $|f(x_{n})| < \epsilon \ \Rightarrow |f(x_{n}) - f(\sqrt{\alpha})| < \epsilon \ \Rightarrow x_{n} \approx \sqrt{\alpha}$
+
+~
+
+¿Sucede lo mismo con la función $e$? Sea $e(x) = \frac{1}{x^{2}} - \alpha$ y dos valores $a, \ b=(a+\delta) \in R$. 
+
+Entonces $|e(a) - e(b)| = |\frac{1}{a^{2}} - \alpha - (\frac{1}{(a+\delta)^{2}} - \alpha) | =
+|\frac{1}{a^{2}} - \frac{1}{a^{2}+\delta^{2}+2*a*\delta|} | = | \frac{a^{2}+\delta^{2}+2*a*\delta-a^{2}}{a^{2}*(a^{2}+\delta^{2}+2*a*\delta)} | = |\frac{\delta^{2}+2*a*\delta}{a^{4}+a^{2}*\delta^{2}+2*a*\delta}|$
+
+Observemos que el denominador de la última expresión tiene un $a^{4}$ como sumando. Por lo tanto, podría suceder que 2 valores fuesen muy lejanos entre sí ($\delta$ grande), y que sin embargo no exista
+tanta diferencia entre sus imágenes. Esto sucede, por ejemplo, cuando $a$ toma valores muy grandes.
+
+En estos casos, podría pasar que $|f(x_{n})| < \epsilon$, y sin embargo $x_{n} >> \frac{1}{\sqrt{\alpha}}$ o $x_{n} << \frac{1}{\sqrt{\alpha}}$
+
+\begin{figure}[!h]
+	\begin{center}
+		  \includegraphics[keepaspectratio]{../Imagenes/exp3/raiz_10000.pdf}
+		  \caption{e(x), con $\alpha=10^{-8}$ y $raiz=\frac{1}{\sqrt{\alpha}}=10000$ }
+		  \label{fig:contra1}
+	\end{center}
+\end{figure}
+\FloatBarrier
+
+Por ejemplo, para la función $e(x)=\frac{1}{x^2}-10^{-8}$ se cumple que $|e(100)| < 10^{-4}$, y sin embargo el valor de la raíz es $x=10000 >> 100$
 
 
 
