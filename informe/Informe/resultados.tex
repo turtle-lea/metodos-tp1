@@ -178,14 +178,61 @@ El criterio de parada se alcanza luego de la 6ta iteración en este experimento 
 
 \subsection{Fijando criterios de parada}
 
+Probamos los 5 criterios para la función $f$ y los siguientes métodos, con distintos valores de $\alpha$ y de $\epsilon$. En todos los casos el comportamiento fue similar, por lo que
+seleccionamos una instancia particular: $\alpha = 901$ y $\epsilon=10^{-10}$ para ser analizada.
+
 \begin{center}
     \small{
     \begin{tabular}{| l | l | l | l | l | l | l | l | l | l | l | l | l |}
     \hline
     Métodos & c2/dif & c2/iter & c3/dif & c3/iter & c4/dif & c4/iter & c5/dif & c5/iter & c6/dif & c6/iter \\ \hline
-    Biseccion\_f & $4*10^{-11}$ & 44 & $2*10^{-9}$ & 39 & $2*10^{-12}$ & 47 & $3*10{-13}$ & 49 & 0. & max\\ \hline
+    Biseccion\_f & $4*10^{-11}$ & 44 & $2*10^{-9}$ & 39 & $2*10^{-12}$ & 47 & $3*10{-13}$ & 49 & 0 & max\\ \hline
     Newton\_f & 0 & 11 & 0 & 11 & $9*10{-14}$ & 10 & 0 & 11 & 0 & max \\ \hline
-    Secante\_e \\ \hline
+    Secante\_e & 0 & 15 & 0 & 14 & 0 & 14 & 0 & 15 & nan & max \\ \hline
     \end{tabular}
     }
 \end{center}
+
+La tabla muestra por cada método y por cada uno de los distintos criterios de parada
+la diferencia entre el resultado obtenido y la raíz teórica (calculada con la función $sqrt$ de c++), y la cantidad de iteraciones antes de la finalización del método debido a dicho criterio.
+Al contrastar los resultados obtenidos con nuestras hipótesis previas (planteadas en el desarrollo) no obtuvimos grandes diferencias. Tal como suponíamos, el criterio 4) $|f(x_{n})| < \epsilon$ funciona
+de forma correcta (levemente mejor que el 2) y el 3) ). Queda demostrado que el 5) es también un buen criterio. Donde si nos llevamos una sorpresa fue en el comportamiento del 6). Sin embargo, entender lo
+que sucede resulta bastante intuitivo. A medida que el método va convergiendo, el denominador se acerca a cero tan rápidamente como lo hace el numerador, por lo que la cota establecida por el criterio
+nunca se alcanza y el método itera la cantidad máxima de iteraciones. Esto es particularmente malo en secante, ya que hace que el método diverja.
+
+También realizamos experimentos similares para la función $e$, entre los cuales seleccionamos 2 posibles escenarios: Uno con un valor de $\alpha$ muy peque\~no y otro en donde es mayor. La primera tabla
+está construída con valores obtenidos al correr los métodos con $\alpha=10 \ , \epsilon = 10^{-10}$. Para el caso de Newton, la semilla inicial fue $\frac{1}{\alpha} = 0.1$.
+Para el caso de Secante las semillas iniciales fueron $0.1$ y $0.5$.
+\begin{center}
+    \small{
+    \begin{tabular}{| l | l | l | l | l | l | l | l | l | l | l | l | l |}
+    \hline
+    Métodos & c2/dif & c2/iter & c3/dif & c3/iter & c4/dif & c4/iter & c5/dif & c5/iter & c6/dif & c6/iter \\ \hline
+    Biseccion\_e & $6*10^{-11}$ & 37 & $6*10^{-12}$ & 39 & $9*10^{-13}$ & 41 & $3*10^{-13}$ & 43 & $6*10^{-17}$ & 60 \\ \hline
+    Newton\_e & 0 & 9 & 0 & 10 & 0 & 9 & 0 & 10 & 0 & max \\ \hline
+    Secante\_e & 0 & 12 & 0 & 12 & $3*10^{-14}$ & 11 & 0 & 12 & nan & max \\ \hline
+    \end{tabular}
+    }
+\end{center}
+
+Los resultados obtenidos fueron muy similares a los del experimento anterior. Los criterios 4) y 5) (relacionados con las imágenes) se comportan de forma correcta, al igual que 2) y 3) (relacionados con los
+términos de la sucesión). El criterio 6) vuelve a fallar al tener un denominador muy peque\~no, por lo que los métodos nunca frenan (salvo en el caso de bisección)
+y realizan la cantidad máxima de iteraciones. Al igual que en $f$, esto hace que secante diverja.
+
+Finalmente realizamos un test para la función $e$ con $\alpha = 10^{-8}$ y $\epsilon = 10^{-5}$. Las semilla inicial para Newton\_e fue $x_{0}=1$. Las semillas iniciales para Secante\_e fueron $x_{0} = 0.1$, 
+$x_{1} = 0.5$
+
+\begin{center}
+    \small{
+    \begin{tabular}{| l | l | l | l | l | l | l | l | l | l | l | l | l |}
+    \hline
+    Métodos & c2/dif & c2/iter & c3/dif & c3/iter & c4/dif & c4/iter & c5/dif & c5/iter & c6/dif & c6/iter \\ \hline
+    Biseccion\_e & $4*10^{-6}$ & 44 & $8*10^{-2}$ & 30 & \textcolor{red}{$5*10^{7}$} & \textcolor{red}{1} & \textcolor{red}{$2.5*10^{7}$} & \textcolor{red}{2} & {$2.5*10^{7}$} & 2  \\ \hline
+    Newton\_e & 0 & 28 & $6.1*10^{-7}$ & 27 & \textcolor{red}{$10^{4}$} & \textcolor{red}{15} & \textcolor{red}{$10^{4}$} & \textcolor{red}{15} & 0 & max \\ \hline
+    Secante\_e & 0 & 44 & $1.5*10^{-7}$ & 43 & \textcolor{red}{$10^{4}$} & \textcolor{red}{25} & \textcolor{red}{$10^{4}$} & \textcolor{red}{24} & nan & max   \\ \hline
+    \end{tabular}
+    }
+\end{center}
+
+Los resultados concuerdan con nuestras hipótesis iniciales. La pendiente de la recta tangente a la función $e$ para x tales que $x >> 0$ es muy peque\~na, por lo que 4) y 5) no constituyen buenos
+criterios de parada. Para casos en donde $\alpha$ es muy peque\~no es conveniente utilizar 2) y 3), ya que no dependen del valor de las imágenes.
