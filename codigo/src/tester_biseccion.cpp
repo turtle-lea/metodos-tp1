@@ -27,7 +27,7 @@ int main()
 			{cout << itbis << " "; ms.Newton_f(criterio,cout,itbis);}
 		cout << "H" << endl;
 		for(itbis = 0; itbis < 31; itbis++)
-			{cout << itbis << " "; ms.Secante_f(criterio,cout,itbis);}		
+			{cout << itbis << " "; ms.Secante_f(criterio,cout,itbis);}
 		cout << "H" << endl;
 /*		for(itbis = 0; itbis < 31; itbis++)
 			{cout << itbis << " "; ms.Regula_falsi_f(criterio,cout,itbis);}
