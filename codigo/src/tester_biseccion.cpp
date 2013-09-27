@@ -6,6 +6,7 @@ using namespace std;
 
 int main()
 {
+	int maxit = 40;
 	int itbis;
 	double alfa;
 	double prec = 0.00000001;
@@ -22,23 +23,26 @@ int main()
 		Criterios cs(maxIter,prec);
 		Metodos ms(fs,cs);
 		//cin >> criterio;
-		cout << alfa << " " << ms.cero_teorico() << endl;
-		for(itbis = 0; itbis < 31; itbis++)
-			{cout << itbis << " "; ms.Newton_f(criterio,cout,itbis);}
-		cout << "H" << endl;
-		for(itbis = 0; itbis < 31; itbis++)
-			{cout << itbis << " "; ms.Secante_f(criterio,cout,itbis);}
-		cout << "H" << endl;
-/*		for(itbis = 0; itbis < 31; itbis++)
+		//~ cout << alfa << " " << ms.cero_teorico() << endl;
+		//~ for(itbis = 0; itbis < maxit; itbis++)
+			//~ {cout << itbis << " "; ms.Newton_f(criterio,cout,itbis);}
+		//~ cout << "H" << endl;
+		//~ for(itbis = 0; itbis < maxit; itbis++)
+		//~ cout << alfa << " " << ms.cero_teorico() << endl;
+			//~ {cout << itbis << " "; ms.Secante_f(criterio,cout,itbis);}
+		//~ cout << "H" << endl;
+/*		for(itbis = 0; itbis < maxit; itbis++)
 			{cout << itbis << " "; ms.Regula_falsi_f(criterio,cout,itbis);}
 		cout << "H" << endl;*/
-		for(itbis = 0; itbis < 31; itbis++)
+		cout << alfa << " " << ms.cero_teorico_e() << endl;
+		for(itbis = 0; itbis < 1; itbis++)
 			{cout << itbis << " "; ms.Newton_e(criterio,cout,itbis);}
 		cout << "H" << endl;
-		for(itbis = 0; itbis < 31; itbis++)
+		cout << alfa << " " << ms.cero_teorico_e() << endl;
+		for(itbis = 0; itbis < 1; itbis++)
 			{cout << itbis << " "; ms.Secante_e(criterio,cout,itbis);}
 		cout << "H" << endl;
-/*		for(itbis = 0; itbis < 31; itbis++)
+/*		for(itbis = 0; itbis < maxit; itbis++)
 			{cout << itbis << " "; ms.Regula_falsi_e(criterio,cout,itbis);}*/
 		cin >> c;
 	}
