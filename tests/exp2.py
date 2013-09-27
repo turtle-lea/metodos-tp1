@@ -76,6 +76,10 @@ for i in range(0,6):
 	ylabel('Cant iteraciones del metodo')
 	
 	savefig("experimento_biseccion_"+str(num)+".jpg")
+	#clf()
+	close()
+	#
+	
 	num = num +1
 	
 close()
