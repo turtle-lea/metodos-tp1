@@ -6,11 +6,22 @@
 using namespace std;
 
 double Metodos::Biseccion_f(int criterio,ostream& os){
-	int i = 0;
-	double res;
 	pair<double, double> seed = functions.semillas_biseccion_f(0);
 	double positivo = seed.first;
 	double negativo = seed.second;
+	return Biseccion_f_aux(criterio,os,positivo,negativo);
+}
+
+double Metodos::Biseccion_f(int criterio,ostream& os,double seed1,double seed2){
+	assert(functions.f(seed1)*functions.f(seed2) < 0);
+	return Biseccion_f_aux(criterio, os, seed1, seed2);
+}
+
+double Metodos::Biseccion_f_aux(int criterio,ostream& os,double seed1,double seed2){
+	int i = 0;
+	double res;
+	double positivo = seed1;
+	double negativo = seed2;
 	double medio = positivo;//X_1
 	double anterior = negativo;//X_0
 
@@ -25,15 +36,26 @@ double Metodos::Biseccion_f(int criterio,ostream& os){
 		i++;
 		os << res << " " << functions.f(res) << endl;
 	}
-	return res;	
+	return res;
 }
 
 double Metodos::Biseccion_e(int criterio,ostream& os){
-	int i = 0;
-	double res;
 	pair<double, double> seed = functions.semillas_biseccion_e(0);
 	double positivo = seed.first;
 	double negativo = seed.second;
+	return Biseccion_e_aux(criterio, os, positivo, negativo);
+}
+
+double Metodos::Biseccion_e(int criterio,ostream& os,double seed1,double seed2){
+	assert(functions.e(seed1)*functions.e(seed2) < 0);
+	return Biseccion_e_aux(criterio,os,seed1,seed2);	
+}
+
+double Metodos::Biseccion_e_aux(int criterio,ostream& os,double seed1, double seed2){
+	int i = 0;
+	double res;
+	double positivo = seed1;
+	double negativo = seed2;
 	double medio = positivo;//X_1
 	double anterior = negativo;//X_0
 	while (!criterios.criterios(criterio,i,medio,anterior,functions.e(medio),functions.e(anterior))){

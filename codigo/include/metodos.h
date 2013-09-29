@@ -13,8 +13,16 @@ class Metodos{
 	public:
 		Metodos(){}
 		Metodos(const Funciones& fs, const Criterios& cs): criterios(cs),functions(fs){}
+		
+		//Biseccion_f
 		double Biseccion_f(int,ostream&);
+		double Biseccion_f(int,ostream&,double,double);
+		double Biseccion_f_aux(int,ostream&,double,double);
+		
+		//Biseccion_e
 		double Biseccion_e(int,ostream&);
+		double Biseccion_e(int,ostream&,double,double);
+		double Biseccion_e_aux(int,ostream&,double,double);
 		
 		//Newton_f
 		double Newton_f(int,ostream&);
