@@ -1,8 +1,13 @@
 \subsection{Estableciendo una buena semilla}
 
 Luego de analizar la convergencia de los métodos sobre las funciones $f(x)$ y $e(x)$ y estudiar los distintos criterios de parada en función de la magnitud del $\alpha$ en cuestión, procedimos a ver, entender y analizar el problema de la semilla inicial para estos métodos y cómo utilizar el método de bisección como auxiliar para hallar una $buena$ semilla.
+
 Bisección en particular para estas dos funciones es un gran método en cuanto a convergencia, dado que con dos semillas cualesquiera (de distinto signo) bisección converge. El problema recae en su velocidad, y al converger linealmente su eficiencia se ve eclipsada por Newton-Raphson por ejemplo, de convergencia cuadrática. Ahora bien, Newton por hipótesis necesita una semilla $cercana$ a la raiz que queremos hallar o podría diverger...
+
 ¿Podemos combinar estos métodos para así encontrar una mejor solución al problema?
+
 Bueno, creemos que si, que utilizando bisección para encontrar semillas tanto para Newton como para Secante puede mejorar notablemente el desempeño de estos métodos, y nuestra hipótesis es que con 4-5 iteraciones de bisección alcanzaría para encontrar una "buena" semilla sin que bisección haga todo el trabajo.
+
 La "lentitud" de bisección recae en los últimos pasos. Este método trabaja siempre sobre un intervalo que en cada paso parte a la mitad y elige una de esas mitades para continuar. El problema es que si el intervalo es chico y el criterio de parada es fuerte, es decir queremos precisión, cada iteracion nos acerca poco al x* deseado. Pero en un principio el intervalo suele ser muy grande, es mucho más lo que se descarta y nos acercamos bastante al valor que queremos hallar. Esta particularidad es la que nos hace pensar que 4 o 5 iteraciones de bisección rápidamente nos puede encontrar una/s semilla/s que Newton o Secante pueden aprovechar.
+
 Para esta etapa de experimentación la idea fue fijar para cada función el criterio de parada que creemos mejor se comporta y luego para distintos valores de $\alpha$ (de distintas magnitudes) determinar cuántas iteraciones de bisección son necesarias para despertar una mejor performance en los métodos que analizamos.
