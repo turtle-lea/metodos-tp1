@@ -239,18 +239,56 @@ criterios de parada. Para casos en donde $\alpha$ es muy peque\~no es convenient
 
 \subsection{Estableciendo una buena semilla}
 
-Para esta etapa decidimos evaluar cinco distintos $alpha$s a saber: $10^{-5}$, 0.001, 5.25, 100 y $10^5$.
+Para esta etapa decidimos evaluar cinco distintos $\alpha$s a saber: $10^{-5}$, 0.001, 5.25, 100 y $10^5$.
 
-La idea es ver el comportamiento con un \alpha muy grande y uno muy chico, dos intermedios y el standard 5.25, valor arbitrario impuesto desde comienzos de la experimentación.
+La idea es ver el comportamiento con un $\alpha$ muy grande y uno muy chico, dos intermedios y el standard 5.25, valor arbitrario impuesto desde comienzos de la experimentación.
 
-Los criterios de parada fueron el error absoluto en la imagen para $f(x)$ y la distancia relativa de iteraciones sucesivas para $e(x)$ considerando los experimentado anteriormente.
+Los criterios de parada fueron el error absoluto en la imagen para $f(x)$ y la distancia relativa de iteraciones sucesivas para $e(x)$ considerando lo experimentado anteriormente.
 
-Tomamos la decisión de volcar los resultados en cinco distintos gráficos, uno para cada $alpha$, en los cuales se refleja para cada método (Newton-Secante) la cantidad de iteraciones que le toma al método en relación a cuantas iteraciónes de biseccion se dieron para hallar la semilla, y en cada caso para cada función, cuantas iteraciones le toma a bisección terminar según el criterio de parada (Figuras 11-15).
+Otro detalle a observar es que si no se utiliza bisección para encontrar una mejor semilla (cantidad de iteraciones de bisección = 0), las semillas "hardcodeadas" que tomamos son:
+
+\begin{itemize}
+	\item 1 y $\alpha$ si $\alpha < 1$ 
+	\item $\alpha$ y 1 en caso contrario
+\end{itemize}
+
+Newton sólo se queda con el primero de dichos valores como semilla para cada caso.
+
+Tomamos la decisión de volcar los resultados en cinco distintos gráficos, uno para cada $\alpha$, en los cuales se refleja para cada método (Newton-Secante) la cantidad de iteraciones que le toma al método en relación a cuantas iteraciónes de bisección se dieron para hallar la semilla, y en cada caso para cada función $f$ o $e$, cuantas iteraciones le toma a bisección terminar según el criterio de parada (Figuras 11-15).
 
 \begin{figure}[!h]
 	\begin{center}
-		  \includegraphics[keepaspectratio]{../Imagenes/exp4/experimento_biseccion_1.jpg}
-		  \caption{Todos juntos en un mismo gráfico}
+		  \includegraphics[scale=0.5]{../Imagenes/exp4/experimento_biseccion_1.jpg}
+		  \caption{Experimento con $\alpha = 10^{-5}$, bisección itera 17 veces para $f(x)$; 35 veces para $e(x)$}
+		  \label{fig:contra1}
+	\end{center}
+\end{figure}
+\FloatBarrier
+
+Como primer resultado obtuvimos este gráfico, Figura 11. Podemos apreciar que con un valor de $\alpha$ muy chico, para $f(x)$ tanto Newton-Raphson como Secante se comportan bien, de hecho pareciera no ser necesario siquiera buscar una semilla con bisección, pero con 4-5 iteraciones del mismo podemos encontrar una semilla que mejora el rendimiento de ambos métodos, como habiamos sospechado y planteado en las hipótesis.
+
+Sin embargo, todo cambia en el caso de la función $e(x)$. Podemos observar que en este caso, no es sino hasta que bisección itera unas nueve veces que Newton y Secante comienzan a comportarse como esperamos. Previo a eso, en el caso de Secante parece iterar una única vez y detenerse, pero esto se debe al criterio elegido y en realidad en estos casos Secante puede no converger al punto deseado, sino que arroja dos valores muy cercanos entre si y termina, pero que tienen imagenes muy distintas. Newton en cambio alcanza el número máximo de iteraciones, y no en todos los casos converge. Esto sucede por la pinta que tiene la función $e(x)$, y los problemas que esta función trae si el alpha es muy pequeño. Pocas iteraciones de bisección parecen no ayudar a la convergencia de los métodos o incluso podrían alejar a la semilla de la raiz considerando la semilla inicial hardcodeada.
+
+Lo que si es seguro es que con nueve iteraciones de bisección la situación cambia y tanto Newton como Secante parecen tener una semilla razonable para converger en pocas iteraciones. Considerando que bisección tarda 35 interaciones en alcanzar el criterio de parada, y ambas funciones con las semillas iniciales hardcodeadas parecen romperse, la combinación de ambos métodos parece ser una buena solución.
+
+\begin{figure}[!h]
+	\begin{center}
+		  \includegraphics[scale=0.5]{../Imagenes/exp4/experimento_biseccion_2.jpg}
+		  \caption{Experimento con $\alpha = 0.001$, bisección itera 21 veces para $f(x)$; 32 veces para $e(x)$}
+		  \label{fig:contra1}
+	\end{center}
+\end{figure}
+\FloatBarrier
+
+Similar al caso anterior, con este nuevo valor de alpha (de módulo pequeño) sucede lo mismo, pero en menor escala. Ya con 5 iteraciones de bisección alcanzamos un comportamiento deseado para ambas funciones considerando ambos métodos, aunque para $f(x)$ podemos decir que alcanza con 3-4 iteraciones. 
+
+Sin embargo para $f(x)$ bisección necesita hacer más iteraciones para alcanzar el criterio de parada, al contrario de para $e(x)$ donde con unas iteraciones menos ya termina.
+
+
+\begin{figure}[!h]
+	\begin{center}
+		  \includegraphics[scale=0.5]{../Imagenes/exp4/experimento_biseccion_3.jpg}
+		  \caption{Experimento con $\alpha = 5.25$, bisección itera 30 veces para $f(x)$; 31 veces para $e(x)$}
 		  \label{fig:contra1}
 	\end{center}
 \end{figure}
@@ -258,36 +296,25 @@ Tomamos la decisión de volcar los resultados en cinco distintos gráficos, uno 
 
 \begin{figure}[!h]
 	\begin{center}
-		  \includegraphics[keepaspectratio]{../Imagenes/exp4/experimento_biseccion_2.jpg}
-		  \caption{Todos juntos en un mismo gráfico}
+		  \includegraphics[scale=0.5]{../Imagenes/exp4/experimento_biseccion_4.jpg}
+		  \caption{Experimento con $\alpha = 100$, bisección itera 35 veces para $f(x)$; 37 veces para $e(x)$}
 		  \label{fig:contra1}
 	\end{center}
 \end{figure}
 \FloatBarrier
 
+Tanto en la Figura 13 como en la 14 y en la 15 podemos ver que a medida que $\alpha$ aumenta, la cantidad de iteraciones de bisección como método individual para el hallazgo de raices reales aumenta, es decir bisección necesita iterar más a medida que alpha aumenta. No así para el caso de $e(x)$. Habíamos visto que a medida que $\alpha$ aumenta bisección parecía necesitar de menos iteraciones para terminar, y ese resultado se extiende hasta la Figura 13, pero luego vemos que vuelve a aumentar y es lo esperado. Bisecci\'on\_e necesita más iteraciones cuando trabaja con alphas muy grandes o muy chicos.
+
+Dicho esto, podemos observar que para alphas cercanos al 1, con pocas iteraciones de bisección encontramos una buena semilla, independientemente del método o función que useamos. Pero a medida que alpha aumenta, al menos para la función $e(x)$ vemos que se necesitan más iteraciones. Para Newton al menos, pocas iteraciones de bisección no nos son de ayuda dado que ya partimos de una buena semilla por como fueron pensadas las semillas hardcodeadas, y unas pocas iteraciones nos $alejan$ en realidad de la raíz en cuestión. Desde el punto de vista de la bisección en si, si la raíz esta muy cerca del borde del intervalo a biseccionar (que de por si como fue implementado bisección, para alphas grandes el intervalo es muy grande) y considerando que la semilla hardcodeada esta bastante cerca de la raíz, la primera iteración de bisección nos aleja mucho del punto en cuestión y luego se acerca de a poco hasta que, yendo al extremo y con un alpha muy grande recién a las 24-25 iteraciones mejoramos la semilla inicial.
+
 \begin{figure}[!h]
 	\begin{center}
-		  \includegraphics[keepaspectratio]{../Imagenes/exp4/experimento_biseccion_3.jpg}
-		  \caption{Todos juntos en un mismo gráfico}
+		  \includegraphics[scale=0.5]{../Imagenes/exp4/experimento_biseccion_5.jpg}
+		  \caption{Experimento con $\alpha = 10^{5}$, bisección itera 52 veces para $f(x)$; 52 veces para $e(x)$}
 		  \label{fig:contra1}
 	\end{center}
 \end{figure}
 \FloatBarrier
 
-\begin{figure}[!h]
-	\begin{center}
-		  \includegraphics[keepaspectratio]{../Imagenes/exp4/experimento_biseccion_4.jpg}
-		  \caption{Todos juntos en un mismo gráfico}
-		  \label{fig:contra1}
-	\end{center}
-\end{figure}
-\FloatBarrier
+En un principio los resultados parecen concordar con nuestras hipótesis, pero parcialmente. Vemos claramente en los gráficos que no siempre alcanza con pocas iteraciones de bisección. Lo que si es seguro es que utilizar bisección en combinación con otros métodos es una buena idea y mejora el desempeño total de los métodos.
 
-\begin{figure}[!h]
-	\begin{center}
-		  \includegraphics[keepaspectratio]{../Imagenes/exp4/experimento_biseccion_5.jpg}
-		  \caption{Todos juntos en un mismo gráfico}
-		  \label{fig:contra1}
-	\end{center}
-\end{figure}
-\FloatBarrier
