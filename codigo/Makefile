@@ -20,7 +20,7 @@ obj/criterios.o : src/criterios.cpp
 	$(CC) -c src/criterios.cpp -o obj/criterios.o
 
 clean:
-	rm -f -r bin obj timetests
+	rm -f -r bin obj ../timetests
 
 test1: folder obj/funciones.o obj/metodos.o obj/criterios.o
 	$(CC) -c src/test1.cpp -o obj/test1.o
@@ -43,6 +43,6 @@ testearBiseccion: folder obj/funciones.o obj/metodos.o obj/criterios.o
 	$(CC) -o bin/tester_biseccion obj/tester_biseccion.o obj/funciones.o obj/metodos.o obj/criterios.o
 
 time: folder obj/funciones.o obj/metodos.o obj/criterios.o
-	mkdir -p ./timetests
+	mkdir -p ../timetests
 	$(CC) -c src/time_tester.cpp -o obj/time_tester.o
 	$(CC) -o bin/time obj/time_tester.o obj/funciones.o obj/metodos.o obj/criterios.o

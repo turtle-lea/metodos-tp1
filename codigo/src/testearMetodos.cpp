@@ -17,19 +17,19 @@ int main(){
 		cin.putback(c);
 		cin >> alfa;
 		cin >> func;
-		esFuncionValida = ((int)func == (int)1 || (int)func == (int)2);
+		esFuncionValida = (func == 1 || func == 2);
 		if(!esFuncionValida){
 			cout << "No es una funcion valida.\n";
 			break;
 		}
 		cin >> met;
-		esMetodoValido = (1 <= func && func <=4);
+		esMetodoValido = (1 <= met && met <=3);
 		if(!esMetodoValido){
 			cout << "No es un metodo valido.\n";
 			break;
 		}
 		cin >> criterio;
-		esCriterioValido = (1 <= func && func <= 6);
+		esCriterioValido = (1 <= criterio && criterio <= 6);
 		if(!esCriterioValido){
 			cout << "No es un criterio valido.\n";
 			break;
@@ -51,9 +51,6 @@ int main(){
 					case 3:
 						ms.Secante_f(criterio,cout);
 						break;
-					case 4:
-						ms.Regula_falsi_f(criterio,cout);
-						break;
 				}		
 				break;
 			case 2:
@@ -66,9 +63,6 @@ int main(){
 						break;
 					case 3:
 						ms.Secante_e(criterio,cout);
-						break;
-					case 4:
-						ms.Regula_falsi_e(criterio,cout);
 						break;
 				}
 				break;
