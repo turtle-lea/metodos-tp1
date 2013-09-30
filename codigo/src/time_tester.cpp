@@ -11,9 +11,9 @@ using namespace std;
 
 int main(){
 	ofstream out;
-	//Formato del time_test.in: Metodo Funcion Alfa seed1 seed2(para algunos) Criterio Precision MaxIter
-	double alfa, prec, seed1, seed2;
-	int func,met, maxIter, criterio;
+	//Formato del time_test.in: Metodo Funcion Alfa cantItBis Criterio Precision MaxIter
+	double alfa, prec;
+	int met, func, cantItBis, maxIter, criterio;
 	unsigned long long int start, end, result;
 	bool esFuncionValida,esMetodoValido,esCriterioValido;
 	cin >> met;
@@ -23,10 +23,7 @@ int main(){
 	esFuncionValida = (func == 1 || func == 2);
 	assert(esFuncionValida);
 	cin >> alfa;
-	cin >> seed1;
-	if(met != 2 ){
-		cin >> seed2;
-	}
+	cin >> cantItBis;
 	cin >> criterio;
 	esCriterioValido = (1 <= criterio && criterio <= 6);
 	assert(esCriterioValido);
@@ -45,7 +42,7 @@ int main(){
 					for(int i = 0; i < cantRepeticiones; i++){
 						start=0; end=0;
 						MEDIR_TIEMPO_START(start);
-						ms.Biseccion_f(criterio,cout,seed1,seed2);
+						ms.Biseccion_f(criterio,cout);
 						MEDIR_TIEMPO_STOP(end);
 						result += end-start;
 						out << end-start << endl;
@@ -56,7 +53,7 @@ int main(){
 					for(int i = 0; i < cantRepeticiones; i++){
 						start=0; end=0;
 						MEDIR_TIEMPO_START(start);
-						ms.Newton_f(criterio,cout,seed1);
+						ms.Newton_f(criterio,cout,cantItBis);
 						MEDIR_TIEMPO_STOP(end);
 						result += end-start;
 					}
@@ -66,7 +63,7 @@ int main(){
 					for(int i = 0; i < cantRepeticiones; i++){
 						start=0; end=0;
 						MEDIR_TIEMPO_START(start);
-						ms.Secante_f(criterio,cout,seed1,seed2);
+						ms.Secante_f(criterio,cout,cantItBis);
 						MEDIR_TIEMPO_STOP(end);
 						result += end-start;
 					}
@@ -76,7 +73,7 @@ int main(){
 					for(int i = 0; i < cantRepeticiones; i++){
 						start=0; end=0;
 						MEDIR_TIEMPO_START(start);
-						ms.Regula_falsi_f(criterio,cout,seed1,seed2);
+						ms.Regula_falsi_f(criterio,cout,cantItBis);
 						MEDIR_TIEMPO_STOP(end);
 						result += end-start;
 					}
@@ -90,7 +87,7 @@ int main(){
 					for(int i = 0; i < cantRepeticiones; i++){
 						start=0; end=0;
 						MEDIR_TIEMPO_START(start);
-						ms.Biseccion_e(criterio,cout,seed1,seed2);
+						ms.Biseccion_e(criterio,cout);
 						MEDIR_TIEMPO_STOP(end);
 						result += end-start;
 					}
@@ -100,7 +97,7 @@ int main(){
 					for(int i = 0; i < cantRepeticiones; i++){
 						start=0; end=0;
 						MEDIR_TIEMPO_START(start);
-						ms.Newton_e(criterio,cout,seed1);
+						ms.Newton_e(criterio,cout,cantItBis);
 						MEDIR_TIEMPO_STOP(end);
 						result += end-start;
 					}
@@ -110,7 +107,7 @@ int main(){
 					for(int i = 0; i < cantRepeticiones; i++){
 						start=0; end=0;
 						MEDIR_TIEMPO_START(start);
-						ms.Secante_e(criterio,cout,seed1,seed2);
+						ms.Secante_e(criterio,cout,cantItBis);
 						MEDIR_TIEMPO_STOP(end);
 						result += end-start;
 					}
@@ -120,7 +117,7 @@ int main(){
 					for(int i = 0; i < cantRepeticiones; i++){
 						start=0; end=0;
 						MEDIR_TIEMPO_START(start);
-						ms.Regula_falsi_e(criterio,cout,seed1,seed2);
+						ms.Regula_falsi_e(criterio,cout,cantItBis);
 						MEDIR_TIEMPO_STOP(end);
 						result += end-start;
 					}
