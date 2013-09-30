@@ -32,7 +32,7 @@ int main(){
 	Funciones fs(alfa);
 	Criterios cs(maxIter,prec);
 	Metodos ms(fs,cs);
-	int cantRepeticiones = 200;
+	int cantRepeticiones = 1000;
 	result = 0;
 	switch(func){
 		case 1:
@@ -68,16 +68,6 @@ int main(){
 						result += end-start;
 					}
 					break;
-				case 4:
-					out.open("../timetests/reg_f.txt");
-					for(int i = 0; i < cantRepeticiones; i++){
-						start=0; end=0;
-						MEDIR_TIEMPO_START(start);
-						ms.Regula_falsi_f(criterio,cout,cantItBis);
-						MEDIR_TIEMPO_STOP(end);
-						result += end-start;
-					}
-					break;
 			}
 			break;
 		case 2:
@@ -108,16 +98,6 @@ int main(){
 						start=0; end=0;
 						MEDIR_TIEMPO_START(start);
 						ms.Secante_e(criterio,cout,cantItBis);
-						MEDIR_TIEMPO_STOP(end);
-						result += end-start;
-					}
-					break;
-				case 4:
-					out.open("../timetests/reg_e.txt");
-					for(int i = 0; i < cantRepeticiones; i++){
-						start=0; end=0;
-						MEDIR_TIEMPO_START(start);
-						ms.Regula_falsi_e(criterio,cout,cantItBis);
 						MEDIR_TIEMPO_STOP(end);
 						result += end-start;
 					}
