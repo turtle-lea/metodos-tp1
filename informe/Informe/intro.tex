@@ -3,21 +3,20 @@ suma importancia que estas operaciones se realicen en tiempo y forma, es decir, 
 
 ~
 
-En este trabajo práctico analizaremos cuatro de estos métodos para el cálculo de la raiz cuadrada de un número real positivo ($\alpha$): 
+En este trabajo práctico analizaremos tres de estos métodos para el cálculo de la raiz cuadrada de un número real positivo ($\alpha$): 
 \begin{itemize}
-	\item Newton-Raphson.
 	\item Bisección.
+	\item Newton-Raphson.
 	\item Secante.
-	\item Regula Falsi.
 \end{itemize}
 
-Estos se denominan métodos iterativos de punto fijo$^1$ y a grandes rasgos, para hallar la raíz de una función $f(x)$ encuentran el punto fijo $p$ de una función auxiliar $g(x)$ (es decir, $g(p) = p$) de manera tal que $f(p) = 0$. Las funciones $g(x)$ para Newton-Raphson y para Secante son las siguientes (en ese orden):
+Newton y Secante denominan métodos iterativos de punto fijo$^1$ y a grandes rasgos, para hallar la raíz de una función $f(x)$ encuentran el punto fijo $p$ de una función auxiliar $g(x)$ (es decir, $g(p) = p$) de manera tal que $f(p) = 0$. Las funciones $g(x)$ para Newton-Raphson y para Secante son las siguientes (en ese orden):
 \begin{itemize}
 	\item $\displaystyle x_n = g(x_{n-1}) = x_{n-1} - \frac{f(x_{n-1})}{f'(x_{n-1})}$
 	\item $\displaystyle x_n = g(x_{n-1}) = x_{n-1} - f(x_{n-1})*\frac{x_{n-2} - x_{n-1}}{f(x_{n-2}) - f(x_{n-1})}$
 \end{itemize}
 
-Los métodos utilizan estas funciones para generar una sucesión de puntos que uno espera que converjan al punto fijo deseado. Regula-falsi utiliza la misma función que Secante, con la diferencia de que elige con que punto de los anteriores quedarse para seguir cumpliendo con sus hipótesis. Bisección en cambio no utiliza otra función dado que si bien es un método iterativo no es en realidad de punto fijo.
+Los métodos utilizan estas funciones para generar una sucesión de puntos que uno espera que converjan al punto fijo deseado. 
 En particular usaremos estos métodos para hallar las raíces de dos funciones $f(x)$ a conocer:
 
 \begin{itemize}
@@ -30,7 +29,8 @@ Notar que hallar la raíz de $f(x)$ equivale a calcular el valor de $\sqrt{\alph
 
 \subsection{Breve descripción de los métodos}
 
-En general, los cuatro métodos son similares entre sí dado que todos ellos generan una sucesión de puntos que, en el mejor de los casos, tiende al valor que estamos buscando, es decir, converge a la raiz de la función. Sino decimos que el método diverge, y esto por lo general depende del valor inicial que tomemos (semilla). Es la rapidez con la que alcanzan dicho valor lo que los diferencia.
+En general, los cuatro métodos son similares entre sí dado que todos ellos generan una sucesión de puntos que, en el mejor de los casos, tiende al valor que estamos buscando, es decir, converge a la raiz de la función. Sino decimos que el método diverge, y esto principalmente depende del valor inicial que tomemos
+como semilla (aunque depende también de otros factores, como los criterios de parada que utilicemos). Es la rapidez con la que alcanzan dicho valor lo que los diferencia.
 
 %Se entiende por convergencia de un método numérico la garantía de que, al realizar un buen número de repeticiones (iteraciones), las aproximaciones obtenidas terminan por acercarse cada vez más al verdadero valor buscado.
 
@@ -40,9 +40,10 @@ En general, los cuatro métodos son similares entre sí dado que todos ellos gen
 
 Newton-Raphson$^2$ es un algoritmo eficiente para el problema de cero de funciones. Dado que converge cuadráticamente bajo ciertas hipótesis analizaremos exhaustivamente éste método implementado sobre ambas funciones. Luego decidiremos que métodos alternativos se pueden utilizar para cada función, dado que los restantes son más sencillos a nivel implementación pero su convergencia no es tan buena en comparación con el método de Newton, i.e. se aproximan más lentamente a la solución esperada.
 
-Bisección$^3$ por ejemplo posee una convergencia lineal, pero su utilidad recae en que siempre converge, aún con semillas (valores iniciales) muy alejadas del valor a encontrar, y es por esto que lo analizaremos no sólo como método alternativo sino también como generador de semillas para los demás métodos.
+Bisección$^3$ posee una convergencia lineal, pero su utilidad recae en que siempre converge, aún con semillas (valores iniciales) muy alejadas del valor a encontrar, y es por esto que lo analizaremos no sólo como método alternativo sino también como generador de semillas para los demás métodos.
 
-Por otro lado, tanto Secante como Regula Falsi superan a Bisección en convergencia, pero no alcanzan a Newton (convergencia superlineal). Su problema recae en las hipótesis de convergencia. Más adelante veremos su desempeño en comparación con los métodos ya mencionados.$^4$ 
+Por otro lado, tanto Secante tiene convergencia superlineal, por lo que supera a Bisección en velocidad pero no alcanza a Newton.
+Su problema recae en las hipótesis de convergencia. Más adelante veremos su desempeño en comparación con los métodos ya mencionados.$^4$ 
 
 ~
 

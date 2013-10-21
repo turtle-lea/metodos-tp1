@@ -1,5 +1,5 @@
-Como habíamos mencionado anteriormente, el objetivo del trabajo es encontrar las raíces de $f(x)=x^{2} - \alpha$ y $e(x) = 1/x^{2} - \alpha$.
-Para resolver el problema, implementamos para ambas funciones los cuatro métodos iterativos vistos en clase : Bisección, Newton, Regula Falsi y Secante.
+Como habíamos mencionado anteriormente, el objetivo del trabajo es encontrar las raíces de $f(x)=x^{2} - \alpha$ y $e(x) = \frac{1}{x^{2}} - \alpha$.
+Para resolver el problema, implementamos para ambas funciones tres de los cuatro métodos iterativos vistos en clase : Bisección, Newton, y Secante.
 La explicación y la base teórica de los mismos puede ser encontrada fácilmente en distintos libros de métodos numéricos, como
 por ejemplo: "Numerical Analysis, Burden \& Faires". 
 
@@ -10,7 +10,7 @@ más prolijo y legible.
 
 Lo primero que hicimos fue diseñar una clase llamada $Funciones$. La idea es la siguiente: sea $h$ la función que estamos analizando (podría ser tanto $f$ como $e$).
 Como los métodos requieren evaluar $h$ para calcular el valor de la sucesión en los términos siguientes (y algunos $h\_derivada$), sería bueno encapsular estos cálculos
-con un comportamiento similar al de una ''caja negra'' (la famosa caja negra). Esto es: en lugar de efectuar la operación en el scope de la función que ejecuta el método,
+con un comportamiento similar al de una ''caja negra''. Esto es: en lugar de efectuar la operación en el scope de la función que ejecuta el método,
 invocamos a $Funciones.h(x)$ o $Funciones.h\_derivada(x)$, desligándonos de la forma en que estas están implementadas.
 
 Esto es particularmente notorio y beneficioso, por ejemplo, para el código de Newton\_e (i.e: método de Newton para la función $e$. De ahora en más utilizarmos esta notación
@@ -43,20 +43,20 @@ criterios. Tomemos como ejemplo Bisección. Si hubiéramos implementado esa part
 	\EndWhile
 \EndFunction
 \end{algorithmic}
-
+hardcodeada
 ~
 
 Por el contrario, utilizando la clase tenemos:
 
 \begin{algorithmic}
-	\While{$!criterios.parar(parameters)$}
+	\While{$!criterios.parar(parametros)$}
 		\State \ldots
 	\EndWhile
 \end{algorithmic}
 
 ~
 
-La existencia de class Criterios permite agrupar todo el código que esté relacionado con ellos en un solo bloque, con lo cual ahorramos tener que escribirlos
+La existencia de la clase Criterios permite agrupar todo el código que esté relacionado con ellos en un solo bloque, con lo cual ahorramos tener que escribirlos
 en cada una de las guardas del while de los distintos algoritmos. Al mismo tiempo resalta el aspecto independiente mencionado más arriba: Los criterios de parada son 
 independientes a los métodos que los utilizan.
 
@@ -70,9 +70,9 @@ Comenzamos analizando el comportamiento de biseccion\_e y biseccion\_f, ya que a
 $semilla\_biseccion\_h$, donde($h = f \ o \ h=e$), que devuelve 2 valores: $pos$ y $neg$ tales que $h(pos)\geq0$ y $h(neg)$ < 0. La ventaja fundamental de bisección
 se basa en los reducidos requisitos iniciales que exige para garantizar convergencia (simplemente encontrar 2 semillas tales que al evaluarlas en $h$ difieran en signo).
 
-Luego procedimos a analizar la convergencia de los métodos restantes: Newton, Secante y Regula\_Falsi, para ambas funciones. Para todos ellos las condiciones iniciales que garantizan
+Luego procedimos a analizar la convergencia de los métodos restantes: Newton y Secante, tanto para $f$ como para $e$. Para todos ellos las condiciones iniciales que garantizan
 convergencia son más restrictivas que las de bisección. Básicamente se reducen a encontrar una buena semilla que pertenezca a un entorno ''cercano'' a la raíz que queremos encontrar.
-En esta etapa de la experimentación, agregamos una opción en nuestros métodos que permite recibir por stdin (además de alpha), el valor de la semilla inicial (Newton)/ semillas iniciales (Secante, Regula\_Falsi)
+En esta etapa de la experimentación, agregamos una opción en nuestros métodos que permite recibir por stdin (además de alpha), el valor de la semilla inicial (Newton)/ semillas iniciales (Secante)
 con el que queremos que comiencen. 
 
 

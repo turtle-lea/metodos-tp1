@@ -26,105 +26,90 @@ variante seleccionar\'ia para su utilizaci\'on en la pr\'actica.
 
 \subsection{Apéndice B: Código}
 
-M\'etodo de Newton para la funci\'on $f(x)$:
+Los métodos reciben un booleano como parámetro: $hacerBiseccion$. Si el valor del mismo es 1, entonces realiza previamente
+$cantItBis$ iteraciones de bisección y comienza con esos valores iniciales. De lo contrario, utiliza como semillas las que
+recibe como parámetro.
 
-\begin{verbatim}
+M\'etodo de Bisección para la funci\'on $f(x)$:
 
-	double Metodos::Newton_f_aux(int criterio,ostream& os,bool hacerBiseccion,
-	                              int cantItBis,double x_0){
-	double actual, anterior;
-	if(hacerBiseccion){
-		pair<double,double> seed =  functions.semillas_biseccion_f(cantItBis);
-		actual = seed.first;
-		anterior = seed.first;
-	}
-	else{
-		actual = x_0;
-		anterior = x_0;
-	}
-	int i = 0;
-	os << actual << " " <<  functions.f(actual) << endl;
-	while(!criterios.criterios(criterio,i,actual,anterior,functions.f(actual),
-	      functions.f(anterior))){ 
-		anterior = actual;
-		actual = anterior - (functions.f(anterior)/functions.f_deriv(anterior));
-		++i;
-		os << actual << " " << functions.f(actual) << endl;
-	}
-	return actual;
+\lstset{caption=Biseccion, label=b; framexleftmargin=2mm, frame=shadowbox, rulesepcolor=\color{black}, language={[ANSI]C}}
+\tiny{
+\lstinputlisting[language=C++]{codigo/biseccion.cpp}
 }
-\end{verbatim}
 
-M\'etodo de la secante para $f(x)$:
+\normalsize{M\'etodo de Newton para la funci\'on $f(x)$:}
 
-\begin{verbatim}
-	double Metodos::Secante_f_aux(int criterio,ostream& os,bool hacerBiseccion, int cantItBis,
-	                              double seed1, double seed2){
-	double actual, anterior;
-	if(hacerBiseccion){
-		pair<double,double> seed =  functions.semillas_biseccion_f(cantItBis);
-		anterior = seed.first;
-		actual = seed.second;
-	}
-	else{
-		actual = seed1;
-		anterior = seed2;
-	}
-	double prox;	//X_2
-	int i = 0;
-	while(!criterios.criterios(criterio,i,actual,anterior,functions.f(actual),
-	           functions.f(anterior))){
-		prox = actual - 
-		  (functions.f(actual)*(actual-anterior)/
-		    (functions.f(actual)-functions.f(anterior)));
-		anterior = actual;
-		actual = prox;
-		++i;
-		os << prox << " " << functions.f(prox) << endl;
-	}
-	return actual;
+\lstset{caption=Newton,label=Newt, framexleftmargin=2mm, frame=shadowbox, rulesepcolor=\color{black}, language={[ANSI]C}}
+\tiny{\lstinputlisting[language=C++]{codigo/newton.cpp}}
+
+\normalsize
+(*) $x_{n+1} = x_{n} - \frac{f(x_{n})}{f'(x_{n})}$
+
+M\'etodo de Secante para la funci\'on $f(x)$:
+
+\lstset{caption=Secante,label=Sec, framexleftmargin=2mm, frame=shadowbox, rulesepcolor=\color{black}, language={[ANSI]C}}
+\tiny{
+\lstinputlisting[language=C++]{codigo/secante.cpp}
 }
-\end{verbatim}
 
-M\'etodo $Regula-falsi$ para $f(x)$:
-
-\begin{verbatim}
-	double Metodos::Regula_falsi_f_aux(int criterio,ostream& os,bool hacerBiseccion,
-	                                   int cantItBis,double seed1,double seed2){
-	double positivo, negativo;
-	if(hacerBiseccion){
-		pair<double,double> seed =  functions.semillas_biseccion_f(cantItBis);
-		positivo = seed.first;
-		negativo = seed.second;
-	}
-	else{
-		assert(functions.f(seed1)*functions.f(seed2) < 0);
-		positivo = seed1;
-		negativo = seed2;
-	}
-	double prox;
-	int i = 0;
-
-	while(!criterios.criterios(criterio,i,negativo,positivo,functions.f(negativo),
-	             functions.f(positivo))){
-		prox = negativo - 
-		 (functions.f(negativo)*(negativo-positivo)/
-		   (functions.f(negativo)-functions.f(positivo)));
-		
-		if(prox > 0) positivo = prox;
-		else negativo = prox;
-		++i;
-		os << prox << " " << functions.f(prox) << endl;
-	}
-	return prox;
-}
-\end{verbatim}
+\normalsize
+(**) $x_{n+1} = x_{n} - \frac{f(x_{n})*(x_{n}-x_{n-1})}{f(x_{n})-f(x_{n-1})}$
 
 No se incluyen los c\'odigos para la funci\'on $e(x)$ ya que son exactamente id\'enticos, cambiando $f(x)$ y $f\_deriv(x)$ por $e(x)$ y $e\_deriv(x)$ respectivamente.
 
+\lstset{caption=Semillas iniciales,label=Sem, framexleftmargin=2mm, frame=shadowbox, rulesepcolor=\color{black}, language={[ANSI]C}}
+\tiny{
+\lstinputlisting[language=C++]{codigo/seeds_iniciales.cpp}
+}
 
-\subsection{Apéndice C: Demostración}
+\normalsize
 
+\underline{\emph{Semillas iniciales}}
+
+\underline{\emph{f:}} (*)
+
+\begin{algorithmic} 
+	\If{$\alpha < 1$} 
+		\State $semilla\_positiva = 1$
+		\State $semilla\_negativa = \alpha$
+	\Else
+		\State $semilla\_positiva = \alpha$
+		\State $semilla\_negativa = 1$
+	\EndIf
+\end{algorithmic}
+
+~
+
+\underline{\emph{e:}} (**)
+
+\begin{algorithmic} 
+	\If{$\alpha < 1$} 
+		\State $semilla\_positiva = \alpha$
+		\State $semilla\_negativa = \frac{1}{\alpha}$
+	\Else
+		\State $semilla\_positiva = \frac{1}{\alpha}$
+		\State $semilla\_negativa = \alpha$
+	\EndIf
+\end{algorithmic}
+
+\subsection{Apéndice C: Criterios de parada}
+
+1) $n = MAX\_ITER$
+
+2) $|x_{n} - x_{n-1}| < \epsilon$
+
+3) $\frac{|x_{n} - x_{n-1}|}{|x_{n-1}|} < \epsilon$
+
+4) $|f(x_{n})| < \epsilon$
+
+5) $|f(x_{n})-f(x_{n-1})| < \epsilon$
+
+6) $\frac{|f(x_{n}) - f(x_{n-1})|}{|f(x_{n-1})|} < \epsilon$
+
+\vspace{2cm}
+
+\subsection{Apéndice D: Demostración}
+Secante
 Sea $f(x) = x^2 -a$ una funci\'on a la cual se le quiere encontrar raices.Para ello se propone una sucesi\'on de punto fijo $x_{n+1} = g(x_n) = \frac{1}{2}\left(x_n+ \frac{a}{x_n}\right)$. Veamos si efectivamente $g(x)$ corresponde con el m\'etodo de Newton.
 
 Sea $f(x) = x^2 - a$ $\Rightarrow$ $f'(x) = 2x$. Por lo tanto, la sucesi\'on del m\'etodo de Newton es la siguiente: $g_{2}(x_n) = x_n - \frac{(x_{n}^2 -a)}{2x_n}$. 
@@ -139,7 +124,7 @@ Ant\'es que nada probemos una propiedad que vamos a utilizar m\'as adelante:
 
 \hspace{6.5cm}$x_0 > \sqrt{a} \Rightarrow x_n > \sqrt{a}$ (P1). 
 
-Mediante inducci\'on, definimos el esquema inductivo a probar como:
+Mediante inducci\'on, definimos el esquema inductivo a probSecantear como:
 
 Sea $P_1(n):=$ $x_0 > \sqrt{a} \Rightarrow x_n > \sqrt{a} $
 \begin{itemize}

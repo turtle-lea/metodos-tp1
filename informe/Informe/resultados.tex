@@ -42,22 +42,24 @@ Un aspecto llamativo de los resultados obtenidos en esta etapa es el hecho de qu
 a medida que los valores de $\alpha$ crecen, bisección\_e requiere de una mayor cantidad de iteraciones (en comparación con $f$) para obtener un valor cercano a la raíz de la función. Por ejemplo,
 tomando 40 iteraciones en cada experimento y variando el valor de alfa, obtuvimos que: 
 
-Para $\alpha = 0.1$, $f(x\_40) \approx 1*10^{-13}$ y $e(x\_40) \approx 1*10^{-13}$. 
+Para $\alpha = 0.1$, $f(x_{40}) \approx 1*10^{-13}$ y $e(x_{40}) \approx 1*10^{-13}$. 
 
 Para $\alpha = 7.0$ : 
-$f(x\_40) \approx 1*10^{-11}$ y $e(x\_40) \approx 1*10^{-10}$. 
+$f(x_{40}) \approx 1*10^{-11}$ y $e(x_{40}) \approx 1*10^{-10}$. 
 
-Y ya para $\alpha = 10000.0$: $f(x\_40) \approx 1*10^{-5}$ y $e(x\_40) \approx 0.01$
+Y ya para $\alpha = 10000.0$: $f(x_{40}) \approx 1*10^{-5}$ y $e(x_{40}) \approx 0.01$
 
 Notemos que estamos utilizando el criterio (3) para analizar la calidad de la solución obtenida.
 
-Por lo general biseccion\_e se comprta peor que biseccion\_f (Terminar de pensar por qué)
+Esto se debe a la forma en que calculamos las semillas iniciales dependiendo si se trata de la función $f$ o $e$ (Ver Apéndice B (código), sección semillas iniciales). Para valores muy grandes de $\alpha$,
+la distancia entre los valores de $biseccion\_e$ es mucho mayor a la de $biseccion\_f$. Si la distancia entre las semillas iniciales de ambos métodos es similar, entonces ambos convergen aproximadamente
+luego de la misma cantidad de iteraciones (con el mismo criterio y el mismo $\epsilon$).
 
 Contrariamente a lo que suponíamos, al analizar newton\_f \ descubrimos que, luego de fijar $\alpha$ (distinto de cero), el método converge para cualquier semilla inicial que tomemos (también distinta de 0).
 Pensemos un poco por qué sucede esto: 
 Anteriormente ya demostramos que si $seed\_inicial > \sqrt{\alpha}$ entonces el método converge (ejercicio 3 de la práctica). 
 Sin embargo, ¿ qué sucede cuando pertenece al itervalo $(0,\sqrt{\alpha})$. $x_1$ es el valor 
-obtenido a partir de la interesección entre la recta tangente a $f(x)$ en $(x_0,f(x_0)$ y el eje de abscisas. Experimentalmente parecería ser que el valor de $x_1$ obtenido luego de la primera 
+obtenido a partir de la interesección entre la recta tangente a $f(x)$ en $(x_0,f(x_0))$ y el eje de abscisas. Experimentalmente parecería ser que el valor de $x_1$ obtenido luego de la primera 
 iteración es mayor a $\sqrt{\alpha}$. Este hecho puede explicarse en función la pendiente de la recta tangente en la semilla inicial. Como la misma tiene un valor peque\~no en módulo pero positivo
 (menor a $2*\sqrt{\alpha}$), no es ilógico pensar que cortará al eje de abscisas en un valor de $x$ mayor a  $\sqrt{\alpha}$. El siguiente gráfico intenta representar esta idea:  
 
@@ -188,7 +190,7 @@ seleccionamos una instancia particular: $\alpha = 901$ y $\epsilon=10^{-10}$ par
     Métodos & c2/dif & c2/iter & c3/dif & c3/iter & c4/dif & c4/iter & c5/dif & c5/iter & c6/dif & c6/iter \\ \hline
     Biseccion\_f & $4*10^{-11}$ & 44 & $2*10^{-9}$ & 39 & $2*10^{-12}$ & 47 & $3*10{-13}$ & 49 & 0 & max\\ \hline
     Newton\_f & 0 & 11 & 0 & 11 & $9*10{-14}$ & 10 & 0 & 11 & 0 & max \\ \hline
-    Secante\_e & 0 & 15 & 0 & 14 & 0 & 14 & 0 & 15 & nan & max \\ \hline
+    Secante\_f & 0 & 15 & 0 & 14 & 0 & 14 & 0 & 15 & nan & max \\ \hline
     \end{tabular}
     }
 \end{center}
@@ -234,23 +236,25 @@ $x_{1} = 0.5$
     }
 \end{center}
 
-Los resultados concuerdan con nuestras hipótesis iniciales. La pendiente de la recta tangente a la función $e$ para x tales que $x >> 0$ es muy peque\~na, por lo que 4) y 5) no constituyen buenos
+Los resultados concuerdan con nuestras hipótesis iniciales. A partir de cierto valor $x_0$ se cumple que $|f(x)| \approx 0$, para $x>x_{0}$, por lo que 4) y 5) no constituyen buenos
 criterios de parada. Para casos en donde $\alpha$ es muy peque\~no es conveniente utilizar 2) y 3), ya que no dependen del valor de las imágenes.
 
 \subsection{Estableciendo una buena semilla}
 
-Para esta etapa decidimos evaluar cinco distintos $\alpha$s a saber: $10^{-5}$, 0.001, 5.25, 100 y $10^5$.
+Para esta etapa decidimos evaluar cinco distintos $\alpha$s. A saber: $10^{-5}$, 0.001, 5.25, 100 y $10^5$.
 
 La idea es ver el comportamiento con un $\alpha$ muy grande y uno muy chico, dos intermedios y el standard 5.25, valor arbitrario impuesto desde comienzos de la experimentación.
 
 Los criterios de parada fueron el error absoluto en la imagen para $f(x)$ y la distancia relativa de iteraciones sucesivas para $e(x)$ considerando lo experimentado anteriormente.
 
-Otro detalle a observar es que si no se utiliza bisección para encontrar una mejor semilla (cantidad de iteraciones de bisección = 0), las semillas "hardcodeadas" que tomamos son:
+Otro detalle a observar es que si no se utiliza bisección para encontrar una mejor semilla (cantidad de iteraciones de bisección = 0), las semillas iniciales que tomamos son:
 
 \begin{itemize}
 	\item 1 y $\alpha$ si $\alpha < 1$ 
 	\item $\alpha$ y 1 en caso contrario
 \end{itemize}
+
+(Ver Apéndice B: código, sección semillas iniciales).
 
 Newton sólo se queda con el primero de dichos valores como semilla para cada caso.
 
@@ -267,7 +271,7 @@ Tomamos la decisión de volcar los resultados en cinco distintos gráficos, uno 
 
 Como primer resultado obtuvimos este gráfico, Figura 11. Podemos apreciar que con un valor de $\alpha$ muy chico, para $f(x)$ tanto Newton-Raphson como Secante se comportan bien, de hecho pareciera no ser necesario siquiera buscar una semilla con bisección, pero con 4-5 iteraciones del mismo podemos encontrar una semilla que mejora el rendimiento de ambos métodos, como habiamos sospechado y planteado en las hipótesis.
 
-Sin embargo, todo cambia en el caso de la función $e(x)$. Podemos observar que en este caso, no es sino hasta que bisección itera unas nueve veces que Newton y Secante comienzan a comportarse como esperamos. Previo a eso, en el caso de Secante parece iterar una única vez y detenerse, pero esto se debe al criterio elegido y en realidad en estos casos Secante puede no converger al punto deseado, sino que arroja dos valores muy cercanos entre si y termina, pero que tienen imagenes muy distintas. Newton en cambio alcanza el número máximo de iteraciones, y no en todos los casos converge. Esto sucede por la pinta que tiene la función $e(x)$, y los problemas que esta función trae si el alpha es muy pequeño. Pocas iteraciones de bisección parecen no ayudar a la convergencia de los métodos o incluso podrían alejar a la semilla de la raiz considerando la semilla inicial hardcodeada.
+Sin embargo, todo cambia en el caso de la función $e(x)$. Podemos observar que en este caso, no es sino hasta que bisección itera unas nueve veces que Newton y Secante comienzan a comportarse como esperamos. Previo a eso, en el caso de Secante parece iterar una única vez y detenerse, pero esto se debe al criterio elegido y en realidad en estos casos Secante puede no converger al punto deseado, sino que arroja dos valores muy cercanos entre si y termina, pero que tienen imagenes muy distintas. Newton en cambio alcanza el número máximo de iteraciones, y no en todos los casos converge. Esto sucede por la pinta que tiene la función $e(x)$, y los problemas que esta función trae si el alpha es muy pequeño. Pocas iteraciones de bisección parecen no ayudar a la convergencia de los métodos o incluso podrían alejar a la semilla de la raiz considerando la semilla inicial tomada.
 
 Lo que si es seguro es que con nueve iteraciones de bisección la situación cambia y tanto Newton como Secante parecen tener una semilla razonable para converger en pocas iteraciones. Considerando que bisección tarda 35 interaciones en alcanzar el criterio de parada, y ambas funciones con las semillas iniciales hardcodeadas parecen romperse, la combinación de ambos métodos parece ser una buena solución.
 

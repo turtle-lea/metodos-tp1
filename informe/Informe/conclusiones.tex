@@ -1,7 +1,26 @@
+El trabajo nos permitió estudiar y analizar empíricamente el comportamiento los algoritmos iterativos aprendidos en clase que sirven para hallar raíces de funciones reales ($R \rightarrow R$).
 
+Tal como mencionamos en el desarrollo, una porción muy grande de la experimentación estuvo enfocada en comprobar si los métodos convergían o no a la solución, y en caso de no hacerlo, intentar explicar las
+causas de dicho comportamiento. Efectivamente, los 3 algoritmos implementados (para ambas funciones) convergen a las raíces. Si bien es cierto que en esta primera etapa de la experimentación $Secante\_e$ y
+$Newton\_e$ divergieron para ciertos valores de $\alpha$ y semillas iniciales , esto no entró en contradicción con la teoría sino todo lo contrario.
+Los teoremas de convergencia de Newton y Secante nos hablan de un entorno alrededor de la raíz sobre el cual no tenemos ningún tipo de control. Al probar nuevamente los métodos utilizando los mismos valores 
+de $\alpha$ que anteriormente habían fallado, pero esta vez con valores iniciales más cercanos a las soluciones los métodos convergieron.
+
+Una vez asegurado el aspecto más importante de los algoritmos pudimos hilar un poco más fino y concentrarnos en otro tipo de aspectos. Determinar un buen criterio de parada resulta importante para encontrar un
+balance entre tiempo de ejecución (reflejado en la cantidad de iteraciones que tiene que hacer cada método) y calidad de la solución obtenida (orden de magnitud del error entre la solución obtenida y la
+solución teórica). Con un criterio muy restrictivo los métodos podrían realizar una cantidad de iteraciones innecesaria. Con uno muy laxo podríamos llegar a una solución muy poco precisa. Luego de la 
+experimentación llegamos a la conclusión de que los criterios 4 y 5 (relacionados con la imagen de los valores de la sucesión) funcionan aceptablemente con la función $f$, mientras que los criterios 2 y 3
+(relacionados con los valores de la sucesión) se adapta mejor a la función $e$. El criterio 6 es el más restrictivo de todos y empíricamente registra un mal comportamiento, ya que realiza un cociente con 
+un divisor que cada vez es más cercano a 0 a medida que el método converge.
 
 En cuanto al problema de la semilla inicial y el número de iteraciones de bisección para el hallazgo de una buena semilla, vimos que combinar bisección con otro método es una buena solución que hace más eficiente el resultado. Definir cuántas iteraciones hacer es más delicado y en muchos casos depende del $\alpha$ en cuestión. 
-
 Llegamos a la conclusión de que sobre $f(x)$, independientemente de cual sea el valor de $\alpha$ unas pocas iteraciones de bisección bastan y como planteamos en la hipótesis creemos que 4-5-6 son suficientes.
-
 Sobre $e(x)$ en cambio el valor de $\alpha$ influye mucho más por lo que una cantidad de iteraciones variable puede ser la solución. Concluimos que con 5 a 9 iteraciones de bisección basta para alphas más o menos cercanos a 1 y aumentar la cantidad de iteraciones para valores de $\alpha$ más chicos o mucho más grandes, con valores entre las 15 y 25 iteraciones.
+
+Al final de la experimentación analizamos los tiempos, y pudimos comprobar que la implementación de Newton efectivamente consume menor cantidad de ciclos de clock que los otros métodos, seguido de Secante 
+y Bisección (en ese orden). Nuevamente, los resultados experimentales concuerdan con lo esperado a nivel teórico, ya que Newton tiene convergencia cuadrática, Secante tiene convergencia superlineal y Bisección
+es lineal.
+
+A nivel un poco más personal creemos que el trabajo resultó interesante y didáctico. Si bien el enunciado era muy claro nos dejaba una gran libertad a la hora de realizar y planificar la parte experimental,
+por lo que fue importante ser creativos y al mismo tiempo claros acerca de los puntos sobre los cuales quisimos experimentar y cómo mostrar los resultados. Aprender a utilizar los graficadores y automatizar
+los tests fue sin dudas un desafío muy grande que tuvimos que enfrentar en este trabajo.
