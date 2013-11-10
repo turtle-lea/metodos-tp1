@@ -9,104 +9,138 @@
 
 using namespace std;
 
+enum funcion {f=1,e=2};
+enum metodo {biseccion=1,newton=2,secante=3};
+
 int main(){
 	ofstream out;
-	//Formato del time_test.in: Metodo Funcion Alfa cantItBis Criterio Precision MaxIter
-	double alfa, prec;
-	int met, func, cantItBis, maxIter, criterio;
+	//Formato del time_test.in: Metodo Funcion Alfa Criterio
+	double alfa, precisionActual;
+	int met, func, maxIter, criterio;
 	unsigned long long int start, end, result;
 	bool esFuncionValida,esMetodoValido,esCriterioValido;
 	cin >> met;
-	esMetodoValido = (1 <= met && met <=4);
+	esMetodoValido = (1 <= met && met <=3);
 	assert(esMetodoValido);
 	cin >> func;
 	esFuncionValida = (func == 1 || func == 2);
 	assert(esFuncionValida);
 	cin >> alfa;
-	cin >> cantItBis;
 	cin >> criterio;
 	esCriterioValido = (1 <= criterio && criterio <= 6);
 	assert(esCriterioValido);
-	cin >> prec;
-	cin >> maxIter;
 	Funciones fs(alfa);
-	Criterios cs(maxIter,prec);
-	Metodos ms(fs,cs);
 	int cantRepeticiones = 1000;
 	result = 0;
+	int iteracion = 1;
+// 	cout << "Metodo: " << met << endl;
+// 	cout << "Funcion: " << func << endl;
+// 	cout << "Alfa: " << alfa << endl;
+// 	cout << "MaxIter: " << maxIter << endl;
+// 	cout << "Criterio: " << criterio << endl;
 	switch(func){
-		case 1:
+		case f:
 			switch(met){
-				case 1:
+				case biseccion:
 					out.open("../timetests/bis_f.txt");
-					for(int i = 0; i < cantRepeticiones; i++){
-						start=0; end=0;
-						MEDIR_TIEMPO_START(start);
-						ms.Biseccion_f(criterio,cout);
-						MEDIR_TIEMPO_STOP(end);
-						result += end-start;
-						out << end-start << endl;
-					}
 					break;
-				case 2:
+				case newton:
 					out.open("../timetests/newt_f.txt");
-					for(int i = 0; i < cantRepeticiones; i++){
-						start=0; end=0;
-						MEDIR_TIEMPO_START(start);
-						ms.Newton_f(criterio,cout,cantItBis);
-						MEDIR_TIEMPO_STOP(end);
-						result += end-start;
-					}
 					break;
-				case 3:
+				case secante:
 					out.open("../timetests/sec_f.txt");
-					for(int i = 0; i < cantRepeticiones; i++){
-						start=0; end=0;
-						MEDIR_TIEMPO_START(start);
-						ms.Secante_f(criterio,cout,cantItBis);
-						MEDIR_TIEMPO_STOP(end);
-						result += end-start;
-					}
 					break;
 			}
 			break;
-		case 2:
+		case e:
 			switch(met){
-				case 1:
+				case biseccion:
 					out.open("../timetests/bis_e.txt");
-					for(int i = 0; i < cantRepeticiones; i++){
-						start=0; end=0;
-						MEDIR_TIEMPO_START(start);
-						ms.Biseccion_e(criterio,cout);
-						MEDIR_TIEMPO_STOP(end);
-						result += end-start;
-					}
 					break;
-				case 2:
+				case newton:
 					out.open("../timetests/newt_e.txt");
-					for(int i = 0; i < cantRepeticiones; i++){
-						start=0; end=0;
-						MEDIR_TIEMPO_START(start);
-						ms.Newton_e(criterio,cout,cantItBis);
-						MEDIR_TIEMPO_STOP(end);
-						result += end-start;
-					}
 					break;
-				case 3:
+				case secante:
 					out.open("../timetests/sec_e.txt");
-					for(int i = 0; i < cantRepeticiones; i++){
-						start=0; end=0;
-						MEDIR_TIEMPO_START(start);
-						ms.Secante_e(criterio,cout,cantItBis);
-						MEDIR_TIEMPO_STOP(end);
-						result += end-start;
-					}
 					break;
 			}
 			break;
 	}
-	result = result/cantRepeticiones; //Calculo el promedio
-	out << result;
+	maxIter = 20;
+	while(iteracion < 17){
+		precisionActual = pow(10,(-iteracion));
+		Criterios cs(maxIter,precisionActual);
+		Metodos ms(fs,cs);
+		switch(func){
+			case f:
+				switch(met){
+					case biseccion:
+						for(int i = 0; i < cantRepeticiones; i++){
+							start=0; end=0;
+							MEDIR_TIEMPO_START(start);
+							ms.Biseccion_f(criterio,cout);
+							MEDIR_TIEMPO_STOP(end);
+							result += end-start;
+							//out << end-start << endl;
+						}
+						break;
+					case newton:
+						for(int i = 0; i < cantRepeticiones; i++){
+							start=0; end=0;
+							MEDIR_TIEMPO_START(start);
+							ms.Newton_f(criterio,cout);
+							MEDIR_TIEMPO_STOP(end);
+							result += end-start;
+						}
+						break;
+					case secante:
+						for(int i = 0; i < cantRepeticiones; i++){
+							start=0; end=0;
+							MEDIR_TIEMPO_START(start);
+							ms.Secante_f(criterio,cout);
+							MEDIR_TIEMPO_STOP(end);
+							result += end-start;
+						}
+						break;
+				}
+				break;
+			case e:
+				switch(met){
+					case biseccion:
+						for(int i = 0; i < cantRepeticiones; i++){
+							start=0; end=0;
+							MEDIR_TIEMPO_START(start);
+							ms.Biseccion_e(criterio,cout);
+							MEDIR_TIEMPO_STOP(end);
+							result += end-start;
+						}
+						break;
+					case newton:
+						for(int i = 0; i < cantRepeticiones; i++){
+							start=0; end=0;
+							MEDIR_TIEMPO_START(start);
+							ms.Newton_e(criterio,cout);
+							MEDIR_TIEMPO_STOP(end);
+							result += end-start;
+						}
+						break;
+					case secante:
+						for(int i = 0; i < cantRepeticiones; i++){
+							start=0; end=0;
+							MEDIR_TIEMPO_START(start);
+							ms.Secante_e(criterio,cout);
+							MEDIR_TIEMPO_STOP(end);
+							result += end-start;
+						}
+						break;
+				}
+				break;
+		}
+		result = result/cantRepeticiones; //Calculo el promedio
+		result = floor(result/10000); //Escala para valores más representativos
+		out << iteracion << " " << result << endl;
+		iteracion++;
+	}
 	out.close();
 	cout << "Tiempos en ../timetests/" << endl;
 	return 0;

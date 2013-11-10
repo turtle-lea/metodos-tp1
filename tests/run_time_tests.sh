@@ -1,7 +1,7 @@
 #!/bin/sh
 
 BINFILE=../codigo/bin/time
-TESTINDIR=.
+TESTINDIR=./testfiles
 
 echo "\nIniciando tests de tiempos\n"
 	echo "\tBiseccion f\n"
@@ -21,11 +21,5 @@ echo "\nIniciando tests de tiempos\n"
 	
 	echo "\tSecante e\n"
 	$BINFILE < $TESTINDIR/timetest_sec_e.in
-	
-	echo "\tRegula Falsi f\n"
-	$BINFILE < $TESTINDIR/timetest_reg_f.in
-	
-	echo "\tRegula Falsi e\n"
-	$BINFILE < $TESTINDIR/timetest_reg_e.in
 	
 echo "\n Tests de tiempo terminados con exito\n"

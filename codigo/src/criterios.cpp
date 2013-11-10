@@ -25,6 +25,13 @@ bool Criterios::criterio4_bis_parar(double y, double y_anterior){
 
 bool Criterios::criterios(int selector, int numIter,double x,double x_anterior,double f_x,double f_anterior)
 {
+// 	cout << "Utilizando criterio " << selector << endl;
+// 	cout << "Con precision " << this->epsilon << endl;
+// 	cout << "Voy por la iteracion " << numIter << " de " << this->max_iter << endl;
+// 	cout << "x_n = " << x << endl;
+// 	cout << "x_n-1 = " << x_anterior << endl;
+// 	cout << "f(x_n) = " << f_x << endl;
+// 	cout << "f(x_n-1) = " << f_anterior << endl;
 	bool esPrimeraIteracion = numIter == 0; //Si fuese la primera iteracion, no desearia que se detenga
 	if(!esPrimeraIteracion){
 		if(!criterio1_parar(numIter)){
