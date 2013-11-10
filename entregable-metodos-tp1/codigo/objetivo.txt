@@ -1,0 +1,22 @@
+ Calcular vectores unitarios. Para ello hay que dividir al vector por la norma:
+
+unitario = x / ||x||
+
+y = (y1,y2,y3)
+
+alpha = ||y|| ^ 2
+
+Normalizar el vector equivale a: 
+	dividir "y" por sqrt(alpha)
+	multiplicar "y" por 1/sqrt(alpha)
+
+No podemos utilizar la funcion sqrt(alpha). Por lo tanto hay que encontrarlo de otra forma:
+	METODO 1:
+	f(x) = x^2 - alpha (sí. Este alpha es una constante para la funcion, pero es el valor que queremos hayar!)
+	Llamaremos beta al valor de la raíz obtenida. Luego debemos proceder a calcular 1/beta.
+
+	METODO 2:
+	Definimos e(x) = 1/x^2 - 1/alpha.
+	Llamaremos beta al valor de la raíz obtenida. No debemos hacer nada más.
+
+

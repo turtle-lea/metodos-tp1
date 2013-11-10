@@ -1,0 +1,40 @@
+///////////////Instrucciones de compilación/////////////////////
+
+Ejecutar el comando "make" para compilar los métodos y obtener un ejecutable "main" dentro de la carpeta "bin". Dicho programa corre una instancia particular de valor para alfa y aplica todos los métodos sobre la instancia.
+
+-Utilizando el comando "make testearMetodos" se obtiene un ejecutable "testearMetodos" en la carpeta "bin". Dicho programa acepta por <stdin> un archivo de tests con el siguiente formato:
+
+/////////////////test.in////////////////////////
+Metodo Funcion Alfa Criterio Precision MaxIter
+...Repetido cuantas veces se desee
+#
+////////////////Fin test.in////////////////////
+
+donde 
+	Alfa el valor del parámetro al cual se quiere hallar la aproximación
+	Funcion puede valer 
+					"1" para f(x)
+					"2" para e(x)
+	Metodo puede valer
+					"1" para Biseccion
+					"2" para Newton
+					"3" para Secante
+	Criterio puede valer
+					"1" Maximo Iteraciones
+					"2" Distancia absoluta de iteraciones sucesivas
+					"3" Distancia relativa de iteraciones sucesivas
+					"4" Error absoluto
+					"5" Distancia absoluta de valores de iteraciones sucesivas
+					"6" Distancia relativa de valores de iteraciones sucesivas
+	Precision es el valor del epsilon utilizado para los criterios de parada
+	MaxIter es la cantidad máxima de iteraciones permitidas.
+	
+-Utilizando el comando "make time" se obtiene un ejecutable "time" en la carpeta "bin". Dicho programa acepta por <stdin> un archivo de test con el siguiente formato:
+
+////////////////time_test.in////////////////////////
+Metodo Funcion Alfa Criterio 
+///////////////Fin time_test.in////////////////////
+
+donde los parámetros significan lo mismo que antes. Los resultados son devueltos en un archivo correspondiente en "timetests/"
+
+Obs: Solo admite una línea de test, sin embargo se puede pasar como parámetro el mismo test para "testearMetodos" pero solo ejecuta el primero de todos.
